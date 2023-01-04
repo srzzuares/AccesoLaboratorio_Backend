@@ -1,2 +1,2 @@
 # AccesoLaboratorio
-Es un desarrollo de un sistema escolar que da control de accesos de estudiantes a laboratorios de computadoras de parte de carrera TI 
+Desarrollar un sistema escolar que de control de accesos a los estudiantes a los laboratorios de computo de TI 
