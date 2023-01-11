@@ -1,0 +1,45 @@
+<!-- https://blog.logrocket.com/how-to-set-up-node-typescript-express/ 
+https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-mysql
+ -->
+
+
+1.- Comandos para recrear el proyecto:
+git init -y
+git i express dotenv
+git i -D typescript @types/express @types/node
+npx tsc --init
+npm i -D concurrently nodemon
+
+
+2.- Checar en tsconfig.json si esta habilitado "outDir": "./dist",
+
+
+3.- En package.json verificar si estan bien los Scripts para correr el servidor:
+"scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+
+
+
+4.- Deberan instalar los paquete de node_modules con el comando
+npm i
+Para que le corra el proyecto
+
+
+Se les asignara cada rama (Branch) para cada respectivo integrante.
+
+
+No Utilizen la rama Master / Main
+
+
+
+
+
+----------Cosas Que Aun Faltan en el proyecto:
+
+Instalar paquetes Prisma y enlazar e base de datos de Mysql Workbench
+
+
+
