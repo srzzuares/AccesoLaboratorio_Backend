@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,186 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model alumnos {
+  idAlumnos       Int              @id @default(autoincrement())
+  Matricula       String           @db.VarChar(10)
+  Estatus         alumnos_Estatus? @default(activo)
+  IdGrupo         Int?
+  IdDatos_Persona Int?
+
+  @@index([IdDatos_Persona], map: "IdDatos_Persona_idx")
+  @@index([IdGrupo], map: "IdGrupo_idx")
+}
+
+model bitacora {
+  idBitacora           Int      @id @default(autoincrement())
+  IdPersonal           Int
+  IdLaboratorio        Int
+  IdAlumno             Int
+  IdRecursoLaboratorio Int
+  Fecha_Entrada        DateTime @db.Date
+  Fecha_Salida         DateTime @db.Date
+  Bitacoracol          String   @db.VarChar(45)
+
+  @@index([IdAlumno], map: "idAlumno_idx")
+  @@index([IdLaboratorio], map: "idLaboratorio_idx")
+  @@index([IdPersonal], map: "idPersonal_idx")
+  @@index([IdRecursoLaboratorio], map: "idRecursosLaboratorio_idx")
+}
+
+model carrera {
+  idCarrera   Int              @id @default(autoincrement())
+  Nombre      String?          @db.VarChar(150)
+  Abreviatura String?          @db.VarChar(10)
+  Nivel       carrera_Nivel?
+  Estatus     carrera_Estatus?
+}
+
+model clases {
+  idClases      Int             @id @default(autoincrement())
+  Dia           clases_Dia?
+  Hora_Inicio   DateTime?       @db.Date
+  Hora_Final    DateTime?       @db.Date
+  Actividad     String?         @db.VarChar(45)
+  Materia       String?         @db.VarChar(45)
+  Estatus       clases_Estatus?
+  IdPeriodo     Int
+  IdLaboratorio Int
+  IdPersonal    Int
+  IdGrupo       Int
+
+  @@index([IdGrupo], map: "IdGrupo_idx")
+  @@index([IdLaboratorio], map: "IdLaboratorio_idx")
+  @@index([IdPersonal], map: "IdPersonal_idx")
+  @@index([IdPeriodo], map: "idPeriodo_idx")
+}
+
+model datos_persona {
+  idDatos_persona    Int                    @id @unique(map: "idDatos_persona_UNIQUE")
+  Titulo_Profesional String?                @db.VarChar(10)
+  Apellido_P         String                 @db.VarChar(45)
+  Apellido_M         String?                @db.VarChar(45)
+  Nombre             String                 @db.VarChar(45)
+  Genero             datos_persona_Genero?
+  Fecha_Nacimiento   DateTime               @db.Date
+  Estatus            datos_persona_Estatus? @default(activo)
+  Foto               String?                @db.VarChar(45)
+}
+
+model grupos {
+  idGrupos  Int            @id @default(autoincrement())
+  Estatus   grupos_Estatus
+  Grado     String         @db.VarChar(2)
+  Grupo     String         @db.VarChar(1)
+  IdCarrera Int
+  IdPeriodo Int
+
+  @@index([IdCarrera], map: "IdCarrera_idx")
+  @@index([IdPeriodo], map: "idPeriodo_idx")
+}
+
+model laboratorio {
+  idLaboratorio Int     @id @default(autoincrement())
+  Nombre        String? @db.VarChar(45)
+  Descripcion   String? @db.VarChar(45)
+  Ubicacion     String? @db.VarChar(45)
+  Cantidad      String? @db.VarChar(45)
+  IdPersonal    Int?
+
+  @@index([IdPersonal], map: "idPersonal_idx")
+}
+
+model periodo {
+  idPeriodo    Int             @id @default(autoincrement())
+  Fecha_Inicio DateTime        @db.Date
+  Fecha_Final  DateTime        @db.Date
+  Estatus      periodo_Estatus
+}
+
+model personal {
+  idPersonal        Int              @id @default(autoincrement())
+  Numero_Trabajador String           @db.VarChar(150)
+  Tipo              personal_Tipo    @default(maestro)
+  Estatus           personal_Estatus
+  IdCarrera         Int
+  IdDatosPersona    Int
+
+  @@index([IdCarrera], map: "IdCarrera_idx")
+  @@index([IdDatosPersona], map: "IdDatosPersona_idx")
+}
+
+model recursos_laboratorio {
+  idRecursos_Laboratorio Int                         @id @default(autoincrement())
+  Nombre                 String                      @db.VarChar(45)
+  No_Serie               String                      @db.VarChar(45)
+  Descripcion            String                      @db.VarChar(45)
+  Estado                 recursos_laboratorio_Estado
+  IdLaboratorio          Int
+
+  @@index([IdLaboratorio], map: "IdLaboratorio_idx")
+}
+
+enum grupos_Estatus {
+  activo
+  inactivo
+}
+
+enum clases_Dia {
+  lunes
+  martes
+  miercoles
+  viernes
+  sabado
+}
+
+enum alumnos_Estatus {
+  activo
+  inactivo
+}
+
+enum personal_Tipo {
+  laboratorista
+  maestro
+}
+
+enum carrera_Nivel {
+  tsu
+  ingenieria
+}
+
+enum periodo_Estatus {
+  activo
+  inactivo
+}
+
+enum personal_Estatus {
+  activo
+  inactivo
+}
+
+enum carrera_Estatus {
+  activo
+  inactivo
+}
+
+enum recursos_laboratorio_Estado {
+  activo
+  inactivo
+}
+
+enum datos_persona_Genero {
+  F
+  M
+}
+
+enum clases_Estatus {
+  activo
+  inactivo
+}
+
+enum datos_persona_Estatus {
+  activo
+  inactivo
 }

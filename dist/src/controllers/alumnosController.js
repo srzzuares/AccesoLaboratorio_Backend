@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.grupoAlumno = exports.Alumno = exports.registrarAlumno = exports.actualizarAlumno = exports.eliminarAlumno = exports.agregarAlumno = void 0;
+const agregarAlumno = () => { return null; };
+exports.agregarAlumno = agregarAlumno;
+const eliminarAlumno = () => { return null; };
+exports.eliminarAlumno = eliminarAlumno;
+const actualizarAlumno = () => { return null; };
+exports.actualizarAlumno = actualizarAlumno;
+const registrarAlumno = () => { return null; };
+exports.registrarAlumno = registrarAlumno;
+const Alumno = () => { return null; };
+exports.Alumno = Alumno;
+const grupoAlumno = () => { return null; };
+exports.grupoAlumno = grupoAlumno;
