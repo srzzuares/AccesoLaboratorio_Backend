@@ -1,1 +1,15 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.laboratorista = exports.asignarProfesor = exports.asignarEquipo = exports.grupos = exports.clasesActivo = exports.estadoActDesac = void 0;
+const estadoActDesac = () => { return null; };
+exports.estadoActDesac = estadoActDesac;
+const clasesActivo = () => { return null; };
+exports.clasesActivo = clasesActivo;
+const grupos = () => { return null; };
+exports.grupos = grupos;
+const asignarEquipo = () => { return null; };
+exports.asignarEquipo = asignarEquipo;
+const asignarProfesor = () => { return null; };
+exports.asignarProfesor = asignarProfesor;
+const laboratorista = () => { return null; };
+exports.laboratorista = laboratorista;
