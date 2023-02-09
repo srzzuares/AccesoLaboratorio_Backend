@@ -1,33 +1,33 @@
 import { Express } from "express";
-import {PrismaClient} from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 //Agregar un dato a Bitacora
-const agregarBitadora = async (req:Express.Request, res: Express.Response) => { 
-/*     const agregarBit = await prisma.bitacora.create({
-        data:{
-            IdPersonal: 1,
-            IdLaboratorio: 1,
-            IdAlumno: 2,
-            IdRecursoLaboratorio: 3,
-            Fecha_Entrada: new Date,
-            Fecha_Salida: new Date
-        }
-    }) */
+const agregarBitadora = async (req: Express.Request, res: Express.Response) => {
+    /*     const agregarBit = await prisma.bitacora.create({
+            data:{
+                IdPersonal: 1,
+                IdLaboratorio: 1,
+                IdAlumno: 2,
+                IdRecursoLaboratorio: 3,
+                Fecha_Entrada: new Date,
+                Fecha_Salida: new Date
+            }
+        }) */
 }
 
 
 // Obetener todos los datos de Bitacora
-const obtenerBitacora= async (req:Express.Request, res: Express.Response) => { 
+const obtenerBitacora = async (req: Express.Request, res: Express.Response) => {
     const getBit = await prisma.bitacora.findMany()
     console.log('Estos son los registros de la Bitacora ', getBit)
 }
 
 
 // Onteber un solo elemento de Bitacora
-const obtenerBitacoraOne = async (req:Express.Request, res: Express.Response) => { 
+const obtenerBitacoraOne = async (req: Express.Request, res: Express.Response) => {
     const getBitOne = await prisma.bitacora.findUnique({
-        where:{
+        where: {
             idBitacora: 1
         }
     })
@@ -36,12 +36,12 @@ const obtenerBitacoraOne = async (req:Express.Request, res: Express.Response) =>
 
 
 // Actualizar un elemento de Bitacora
-const actualizarBitacora = async (req:Express.Request, res: Express.Response) => { 
+const actualizarBitacora = async (req: Express.Request, res: Express.Response) => {
     const actualizarBit = await prisma.bitacora.update({
-        where:{
-            idBitacora:1
+        where: {
+            idBitacora: 1
         },
-        data:{
+        data: {
             IdPersonal: 2,
             IdLaboratorio: 2,
             IdAlumno: 1,
@@ -49,24 +49,24 @@ const actualizarBitacora = async (req:Express.Request, res: Express.Response) =>
             Fecha_Entrada: new Date,
             Fecha_Salida: new Date
         }
-    }) 
+    })
     console.log('Se Actualizaron Datos de la Bitacora: ', actualizarBit)
 }
 
 
 // Eliminar un elemento de Bitacora
-const eliminarBitacoraOne = async (req:Express.Request, res: Express.Response) => { 
+const eliminarBitacoraOne = async (req: Express.Request, res: Express.Response) => {
     const eliminarBitOne = await prisma.bitacora.delete({
-        where:{
+        where: {
             idBitacora: 1
         }
-    }) 
+    })
     console.log('Se elimino un dato de la bitacora: ', eliminarBitOne)
 }
 
 
 // Eliminar todo el contenido de Bitacora
-const eliminarBitacoraTodo= async (req:Express.Request, res: Express.Response) => { 
+const eliminarBitacoraTodo = async (req: Express.Request, res: Express.Response) => {
     const eliminarTodoBit = await prisma.bitacora.deleteMany()
     console.log('Se eliminaron todos los datos')
 }
