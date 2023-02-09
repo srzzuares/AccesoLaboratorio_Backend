@@ -5,10 +5,10 @@ const ROUTER = Router();
 
 ROUTER.post('/conectar', agregarBitadora)
 ROUTER.post('/registrar', obtenerBitacora)
-ROUTER.post('/', obtenerBitacoraOne)
-ROUTER.post('/', actualizarBitacora)
-ROUTER.post('/', eliminarBitacoraOne)
-ROUTER.post('/', eliminarBitacoraTodo)
+ROUTER.post('/obtenerBit', obtenerBitacoraOne)
+ROUTER.post('/actualizarBit', actualizarBitacora)
+ROUTER.post('/eliminarBit', eliminarBitacoraOne)
+ROUTER.post('/eliminar', eliminarBitacoraTodo)
 
 
 export default ROUTER;
