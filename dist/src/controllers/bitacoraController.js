@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarBitacoraTodo = exports.eliminarBitacoraOne = exports.actualizarBitacora = exports.obtenerBitacoraOne = exports.obtenerBitacora = exports.agregarBitadora = void 0;
+const express_1 = require("express");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 //Agregar un dato a Bitacora
@@ -30,6 +31,7 @@ exports.agregarBitadora = agregarBitadora;
 const obtenerBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getBit = yield prisma.bitacora.findMany();
     console.log('Estos son los registros de la Bitacora ', getBit);
+    express_1.response.json(getBit);
 });
 exports.obtenerBitacora = obtenerBitacora;
 // Onteber un solo elemento de Bitacora

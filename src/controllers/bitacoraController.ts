@@ -1,4 +1,4 @@
-import { Express } from "express";
+import { Express, response } from "express";
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
@@ -21,6 +21,7 @@ const agregarBitadora = async (req: Express.Request, res: Express.Response) => {
 const obtenerBitacora = async (req: Express.Request, res: Express.Response) => {
     const getBit = await prisma.bitacora.findMany()
     console.log('Estos son los registros de la Bitacora ', getBit)
+    response.json(getBit)
 }
 
 
