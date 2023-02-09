@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/srzzuares/AccesoLaboratorio_Backend#readme",
   "dependencies": {
-    "@prisma/client": "^4.10.0",
+    "@prisma/client": "^4.10.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },

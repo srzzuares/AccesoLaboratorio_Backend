@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const home_1 = __importDefault(require("../routers/home"));
+const alumno_1 = __importDefault(require("../routers/alumno"));
 class Server {
     constructor() {
         this.App = (0, express_1.default)();
@@ -26,6 +27,7 @@ class Server {
     }
     routes() {
         this.App.use('/', home_1.default);
+        this.App.use('/alumno', alumno_1.default);
     }
 }
 exports.default = Server;

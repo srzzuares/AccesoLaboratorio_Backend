@@ -1,14 +1,14 @@
-import {agregarAlumno, obtenerAllAlumno, actualizarAlumno ,eliminarAlumno,obtener1Alumno } from "../controllers/alumnosController";
+import {agregarAlumno, obtenerAllAlumno, actualizarAlumno ,eliminarAlumno, eliminaTodoWarning, obtener1Alumno } from "../controllers/alumnosController";
 import Router from "express";
 
-const ROUTER = Router();
+const ROUTER_Alumno = Router();
 
-/* ROUTER.post('/', agregarAlumno)
-ROUTER.post('/', eliminarAlumno)
-ROUTER.post('/', actualizarAlumno)
-ROUTER.post('/', registrarAlumno)
-ROUTER.post('/', Alumno)
-ROUTER.post('/', grupoAlumno)
- */
+ROUTER_Alumno.post('/agregar', agregarAlumno)
+ROUTER_Alumno.get('/obtener', obtenerAllAlumno)
+ROUTER_Alumno.put('/actualizar', actualizarAlumno)
+ROUTER_Alumno.delete('/eliminar', eliminarAlumno)
+ROUTER_Alumno.delete('/eliminaTodo', eliminaTodoWarning)
+ROUTER_Alumno.get('/obtenerOne', obtener1Alumno)
+ 
 
-export default ROUTER;
+export default ROUTER_Alumno;

@@ -1,14 +1,14 @@
-import { estadoActDesac, conectarDb, usuarioActivo, laboratorista, grupos, asignarEquipo } from "../controllers/bitacoraController";
+import { agregarBitadora, obtenerBitacora, obtenerBitacoraOne, actualizarBitacora, eliminarBitacoraOne, eliminarBitacoraTodo } from "../controllers/bitacoraController";
 import Router from "express";
 
 const ROUTER = Router();
 
-ROUTER.post('/conectar', conectarDb)
-ROUTER.post('/registrar', usuarioActivo)
-ROUTER.post('/', estadoActDesac)
-ROUTER.post('/', laboratorista)
-ROUTER.post('/', grupos)
-ROUTER.post('/', asignarEquipo)
+ROUTER.post('/conectar', agregarBitadora)
+ROUTER.post('/registrar', obtenerBitacora)
+ROUTER.post('/', obtenerBitacoraOne)
+ROUTER.post('/', actualizarBitacora)
+ROUTER.post('/', eliminarBitacoraOne)
+ROUTER.post('/', eliminarBitacoraTodo)
 
 
 export default ROUTER;

@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import EJEMPLO_ROUTER from "../routers/home";
+import ROUTER_Alumno from "../routers/alumno";
 
 class Server {
 
@@ -31,6 +32,7 @@ class Server {
 
     routes() {
         this.App.use('/', EJEMPLO_ROUTER)
+        this.App.use('/alumno', ROUTER_Alumno)
 
     }
 }
