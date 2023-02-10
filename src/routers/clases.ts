@@ -1,14 +1,14 @@
-import { estadoActDesac, clasesActivo, grupos, asignarEquipo, asignarProfesor, laboratorista } from "../controllers/clasesController";
+import { crearClases, obtenerClases, obtenerOneClases, actualizarClases, eliminarClases, eliminarTodoClases } from "../controllers/gruposController";
 import Router from "express";
 
-const ROUTER = Router();
+const ROUTER_Clases = Router();
 
-ROUTER.post('/', estadoActDesac)
-ROUTER.post('/', clasesActivo)
-ROUTER.post('/', grupos)
-ROUTER.post('/', asignarEquipo)
-ROUTER.post('/', asignarProfesor)
-ROUTER.post('/', laboratorista)
+ROUTER_Clases.post('/agregar', crearClases)
+ROUTER_Clases.get('/obtener', obtenerClases)
+ROUTER_Clases.get('/obtenerOne', obtenerOneClases)
+ROUTER_Clases.put('/actualizar', actualizarClases)
+ROUTER_Clases.delete('/eliminar', eliminarClases)
+ROUTER_Clases.delete('/eliminarTodo', eliminarTodoClases)
 
 
-export default ROUTER;
+export default ROUTER_Clases;

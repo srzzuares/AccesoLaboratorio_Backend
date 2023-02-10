@@ -2,6 +2,10 @@ import express, { Application } from "express";
 import EJEMPLO_ROUTER from "../routers/home";
 import ROUTER_Alumno from "../routers/alumno";
 import ROUTER_Bitacora from "../routers/bitacora"
+import ROUTER_Carrera from "../routers/carrera";
+import ROUTER_Clases from '../routers/clases'
+import ROUTER_Daper from "../routers/datos_Persona"
+import ROUTER_Grupos from "../routers/grupos"
 
 class Server {
 
@@ -35,6 +39,10 @@ class Server {
         this.App.use('/', EJEMPLO_ROUTER)
         this.App.use('/alumno', ROUTER_Alumno)
         this.App.use('/bitacora', ROUTER_Bitacora)
+        this.App.use('/carreras', ROUTER_Carrera)
+        this.App.use('/clases', ROUTER_Clases)
+        this.App.use('/datosPersonales', ROUTER_Daper)
+        this.App.use('/grupos', ROUTER_Grupos)
 
     }
 }

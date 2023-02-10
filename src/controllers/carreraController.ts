@@ -1,7 +1,13 @@
-const estadoActDesac = () => { return null }
-const carreraActivo = () => { return null }
-const grupos = () => { return null }
-const asignarEquipo = () => { return null }
+import { Express } from "express";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient()
+
+const crearCarrera = () => {  }
+const obtenerCarrera = () => {  }
+const obtenerOneCarrera = () => {  }
+const actualizarCarrera = () => {  }
+const eliminarCarrera = () => {}
+const eliminarTodoCarrera = () => {}
 
 
-export { estadoActDesac, carreraActivo, grupos, asignarEquipo };
+export { crearCarrera, obtenerCarrera, obtenerOneCarrera, actualizarCarrera, eliminarCarrera, eliminarTodoCarrera};
