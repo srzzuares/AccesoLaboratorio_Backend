@@ -62,7 +62,7 @@ model clases {
 }
 
 model datos_persona {
-  idDatos_persona    Int                    @id @unique(map: "idDatos_persona_UNIQUE")
+  idDatos_persona    Int                    @id @default(autoincrement())
   Titulo_Profesional String?                @db.VarChar(10)
   Apellido_P         String                 @db.VarChar(45)
   Apellido_M         String?                @db.VarChar(45)

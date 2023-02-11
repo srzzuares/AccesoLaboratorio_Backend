@@ -21,7 +21,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `Datos_Persona` ;
 
 CREATE TABLE IF NOT EXISTS `Datos_Persona` (
-  `idDatos_persona` INT NOT NULL COMMENT 'Id generado de manera automatica en la insercion una nueva entrada',
+  `idDatos_persona` INT NOT NULL AUTO_INCREMENT COMMENT 'Id generado de manera automatica en la insercion una nueva entrada',
   `Titulo_Profesional` VARCHAR(10) NULL COMMENT 'Titulo de la persona, en caso de poseerlo',
   `Apellido_P` VARCHAR(45) NOT NULL COMMENT 'Apellido partero de la persona (Obligatorio)',
   `Apellido_M` VARCHAR(45) NULL COMMENT 'Apellido materno de la persona (Opcional)',

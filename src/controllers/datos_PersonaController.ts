@@ -1,46 +1,54 @@
 import { Express } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, datos_persona } from "@prisma/client";
 const prisma = new PrismaClient()
 
-const crearDaper = async (req: Express.Request, res: Express.Response) => { 
+const crearDaper = async (req: Express.Request, res: Express.Response) => {
   //const {} = undefined
-  /* const post = await prisma.datos_persona.create({
+  const post = await prisma.datos_persona.create({
     data: {
-      
+      idDatos_persona: 1,
+      Titulo_Profesional: '',
+      Apellido_P: 'Var',
+      Apellido_M: 'Alv',
+      Nombre: 'Joss',
+      Genero: 'F',
+      Fecha_Nacimiento: '',
+      Estatus: 'activo',
+      Foto: '',
     }
-  }) */
+  })
   console.log('se ha creado un dato de una persona ')
 }
 
 // 
-const obtenerDaper = async (req: Express.Request, res: Express.Response) => { 
+const obtenerDaper = async (req: Express.Request, res: Express.Response) => {
   const getTodoDaPer = await prisma.datos_persona.findMany()
   console.log('Estos son los datos de las personas ', getTodoDaPer)
 }
 
 
-const obtenerOneDaper = async (req: Express.Request, res: Express.Response) => { 
-  
-  
+const obtenerOneDaper = async (req: Express.Request, res: Express.Response) => {
+
+
 }
 
 
-const actualizarDaper = async (req: Express.Request, res: Express.Response) => { 
-  
-  
+const actualizarDaper = async (req: Express.Request, res: Express.Response) => {
+
+
 }
 
 
 const eliminarDaper = async (req: Express.Request, res: Express.Response) => {
-  
-  
+
+
 }
 
 
 const eliminarTodoDaper = async (req: Express.Request, res: Express.Response) => {
-  
-  
+
+
 }
 
 
-export { crearDaper, obtenerDaper, obtenerOneDaper, actualizarDaper, eliminarDaper, eliminarTodoDaper};
+export { crearDaper, obtenerDaper, obtenerOneDaper, actualizarDaper, eliminarDaper, eliminarTodoDaper };

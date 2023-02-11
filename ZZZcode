@@ -40,6 +40,7 @@ No Utilizen la rama Master / Main
 ----------Cosas Que Aun Faltan en el proyecto:
 
 Instalar paquetes Prisma y enlazar e base de datos de Mysql Workbench
+npx prisma migrate dev --name init
 
 
 
