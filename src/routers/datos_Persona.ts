@@ -1,4 +1,4 @@
-import { crearDaper, obtenerDaper, obtenerOneDaper, actualizarDaper, eliminarDaper, eliminarTodoDaper } from "../controllers/gruposController";
+import { crearDaper, obtenerDaper, obtenerOneDaper, actualizarDaper, eliminarDaper, eliminarTodoDaper } from "../controllers/datos_PersonaController";
 import Router from "express";
 
 const ROUTER_DaPer = Router();

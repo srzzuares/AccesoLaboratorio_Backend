@@ -4,16 +4,7 @@ const prisma = new PrismaClient()
 
 //Agregar un dato a Bitacora
 const agregarBitadora = async (req: Express.Request, res: Express.Response) => {
-    /*     const agregarBit = await prisma.bitacora.create({
-            data:{
-                IdPersonal: 1,
-                IdLaboratorio: 1,
-                IdAlumno: 2,
-                IdRecursoLaboratorio: 3,
-                Fecha_Entrada: new Date,
-                Fecha_Salida: new Date
-            }
-        }) */
+    
 }
 
 

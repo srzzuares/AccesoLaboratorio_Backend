@@ -1,4 +1,4 @@
-import { crearClases, obtenerClases, obtenerOneClases, actualizarClases, eliminarClases, eliminarTodoClases } from "../controllers/gruposController";
+import { crearClases, obtenerClases, obtenerOneClases, actualizarClases, eliminarClases, eliminarTodoClases } from "../controllers/clasesController";
 import Router from "express";
 
 const ROUTER_Clases = Router();
