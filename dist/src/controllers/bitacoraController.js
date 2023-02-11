@@ -15,16 +15,18 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 //Agregar un dato a Bitacora
 const agregarBitadora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    /*     const agregarBit = await prisma.bitacora.create({
-            data:{
-                IdPersonal: 1,
-                IdLaboratorio: 1,
-                IdAlumno: 2,
-                IdRecursoLaboratorio: 3,
-                Fecha_Entrada: new Date,
-                Fecha_Salida: new Date
-            }
-        }) */
+    //const {} = null
+    const post = yield prisma.bitacora.create({
+        data: {
+            IdPersonal: 1,
+            IdLaboratorio: 1,
+            IdAlumno: 1,
+            IdRecursoLaboratorio: 1,
+            Fecha_Entrada: Date(),
+            Fecha_Salida: Date(),
+            Bitacoracol: 'Hola Terricola',
+        }
+    });
 });
 exports.agregarBitadora = agregarBitadora;
 // Obetener todos los datos de Bitacora
