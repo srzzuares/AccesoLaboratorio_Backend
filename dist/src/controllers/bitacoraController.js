@@ -10,22 +10,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarBitacoraTodo = exports.eliminarBitacoraOne = exports.actualizarBitacora = exports.obtenerBitacoraOne = exports.obtenerBitacora = exports.agregarBitadora = void 0;
-const express_1 = require("express");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 //Agregar un dato a Bitacora
 const agregarBitadora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const {} = null
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
     const post = yield prisma.bitacora.create({
         data: {
-            IdPersonal: 1,
-            IdLaboratorio: 1,
-            IdAlumno: 1,
-            IdRecursoLaboratorio: 1,
-            Fecha_Entrada: Date(),
-            Fecha_Salida: Date(),
-            Bitacoracol: 'Hola Terricola',
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
         }
+    });
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post
     });
 });
 exports.agregarBitadora = agregarBitadora;
@@ -33,50 +37,80 @@ exports.agregarBitadora = agregarBitadora;
 const obtenerBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getBit = yield prisma.bitacora.findMany();
     console.log('Estos son los registros de la Bitacora ', getBit);
-    express_1.response.json(getBit);
+    res.status(200).json({
+        menssage: "Todos los registros de Bitacora",
+        success: true,
+        data: getBit
+    });
 });
 exports.obtenerBitacora = obtenerBitacora;
-// Onteber un solo elemento de Bitacora
+// Obteber un solo elemento de Bitacora
 const obtenerBitacoraOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idBitacora = Number(req.params.idBitacora);
     const getBitOne = yield prisma.bitacora.findUnique({
         where: {
-            idBitacora: 1
+            idBitacora
         }
     });
-    console.log('Obtuvo el dato :', getBitOne);
+    if (!getBitOne) {
+        res.status(404).json({
+            success: false,
+            message: "Bitacora no encontrado",
+        });
+        return;
+    }
+    res.status(200).json({
+        message: "Bitacora encontrada",
+        success: true,
+        data: getBitOne,
+    });
 });
 exports.obtenerBitacoraOne = obtenerBitacoraOne;
 // Actualizar un elemento de Bitacora
 const actualizarBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idBitacora = Number(req.params.idBitacora);
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
     const actualizarBit = yield prisma.bitacora.update({
         where: {
-            idBitacora: 1
+            idBitacora
         },
         data: {
-            IdPersonal: 2,
-            IdLaboratorio: 2,
-            IdAlumno: 1,
-            IdRecursoLaboratorio: 2,
-            Fecha_Entrada: new Date,
-            Fecha_Salida: new Date
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
         }
     });
-    console.log('Se Actualizaron Datos de la Bitacora: ', actualizarBit);
+    res.status(200).json({
+        menssage: "Actualizacion Completa",
+        success: true,
+        data: actualizarBit
+    });
 });
 exports.actualizarBitacora = actualizarBitacora;
 // Eliminar un elemento de Bitacora
 const eliminarBitacoraOne = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idBitacora = Number(req.params.idBitacora);
     const eliminarBitOne = yield prisma.bitacora.delete({
         where: {
-            idBitacora: 1
+            idBitacora
         }
     });
-    console.log('Se elimino un dato de la bitacora: ', eliminarBitOne);
+    res.status(200).json({
+        menssage: "Elimininado Completado",
+        success: true
+    });
 });
 exports.eliminarBitacoraOne = eliminarBitacoraOne;
 // Eliminar todo el contenido de Bitacora
 const eliminarBitacoraTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const eliminarTodoBit = yield prisma.bitacora.deleteMany();
-    console.log('Se eliminaron todos los datos');
+    res.status(200).json({
+        menssage: "Elimininado Completado de Todo",
+        success: true
+    });
 });
 exports.eliminarBitacoraTodo = eliminarBitacoraTodo;

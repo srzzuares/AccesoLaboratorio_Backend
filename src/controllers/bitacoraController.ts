@@ -1,77 +1,113 @@
-import { Express, response } from "express";
+import { Request, Response } from "express";
 import { PrismaClient, bitacora } from "@prisma/client"
 const prisma = new PrismaClient()
 
 //Agregar un dato a Bitacora
-const agregarBitadora = async (req: Express.Request, res: Express.Response) => {
-    //const {} = null
+const agregarBitadora = async (req: Request, res: Response) => {
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
     const post = await prisma.bitacora.create({
         data: {
-            IdPersonal: 1,
-            IdLaboratorio: 1,
-            IdAlumno: 1,
-            IdRecursoLaboratorio: 1,
-            Fecha_Entrada: Date(),
-            Fecha_Salida: Date(),
-            Bitacoracol: 'Hola Terricola',
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
         }
+    })
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post
     })
 }
 
 
 // Obetener todos los datos de Bitacora
-const obtenerBitacora = async (req: Express.Request, res: Express.Response) => {
+const obtenerBitacora = async (req: Request, res: Response) => {
     const getBit = await prisma.bitacora.findMany()
     console.log('Estos son los registros de la Bitacora ', getBit)
-    response.json(getBit)
+    res.status(200).json({
+        menssage: "Todos los registros de Bitacora",
+        success: true,
+        data: getBit
+    })
 }
 
 
-// Onteber un solo elemento de Bitacora
-const obtenerBitacoraOne = async (req: Express.Request, res: Express.Response) => {
+// Obteber un solo elemento de Bitacora
+const obtenerBitacoraOne = async (req: Request, res: Response) => {
+    const idBitacora = Number(req.params.idBitacora);
     const getBitOne = await prisma.bitacora.findUnique({
         where: {
-            idBitacora: 1
+            idBitacora
         }
     })
-    console.log('Obtuvo el dato :', getBitOne)
+    if (!getBitOne) {
+        res.status(404).json({
+          success: false,
+          message: "Bitacora no encontrado",
+        });
+        return;
+      }
+      res.status(200).json({
+        message: "Bitacora encontrada",
+        success: true,
+        data: getBitOne,
+      });
 }
 
 
 // Actualizar un elemento de Bitacora
-const actualizarBitacora = async (req: Express.Request, res: Express.Response) => {
+const actualizarBitacora = async (req: Request, res: Response) => {
+    const idBitacora = Number(req.params.idBitacora);
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
     const actualizarBit = await prisma.bitacora.update({
         where: {
-            idBitacora: 1
+            idBitacora
         },
         data: {
-            IdPersonal: 2,
-            IdLaboratorio: 2,
-            IdAlumno: 1,
-            IdRecursoLaboratorio: 2,
-            Fecha_Entrada: new Date,
-            Fecha_Salida: new Date
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
         }
+        
     })
-    console.log('Se Actualizaron Datos de la Bitacora: ', actualizarBit)
+    res.status(200).json({
+        menssage:"Actualizacion Completa",
+        success: true,
+        data: actualizarBit
+    })
 }
 
 
 // Eliminar un elemento de Bitacora
-const eliminarBitacoraOne = async (req: Express.Request, res: Express.Response) => {
+const eliminarBitacoraOne = async (req: Request, res: Response) => {
+    const idBitacora = Number(req.params.idBitacora);
     const eliminarBitOne = await prisma.bitacora.delete({
         where: {
-            idBitacora: 1
+            idBitacora
         }
     })
-    console.log('Se elimino un dato de la bitacora: ', eliminarBitOne)
+    res.status(200).json({
+        menssage:"Elimininado Completado",
+        success: true
+    })
 }
 
 
 // Eliminar todo el contenido de Bitacora
-const eliminarBitacoraTodo = async (req: Express.Request, res: Express.Response) => {
+const eliminarBitacoraTodo = async (req: Request, res: Response) => {
     const eliminarTodoBit = await prisma.bitacora.deleteMany()
-    console.log('Se eliminaron todos los datos')
+    res.status(200).json({
+        menssage:"Elimininado Completado de Todo",
+        success: true
+    })
 }
 
 
