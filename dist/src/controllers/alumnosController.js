@@ -63,12 +63,55 @@ const eliminaTodoWarning = () => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.eliminaTodoWarning = eliminaTodoWarning;
 // Obtener solo un usuario alumno
-const obtener1Alumno = () => __awaiter(void 0, void 0, void 0, function* () {
-    const get2 = yield prisma.alumnos.findUnique({
+/* const obtener1Alumno = async () => {
+    const get2 = await prisma.alumnos.findUnique({
         where: {
             idAlumnos: 2
         }
+    })
+    console.log('Alumno: ', get2)
+} */
+/* const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = parseInt(req.params.idAlumnos);
+    const get2 = await prisma.alumnos.findUnique({
+        where: {
+            idAlumnos: idAlumnos
+        }
     });
-    console.log('Alumno: ', get2);
+    res.json({
+        statusCode: 200,
+        data: get2,
+    });
+};
+ */
+/* const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = await prisma.alumnos.findUnique({
+        where: {
+            idAlumnos: idAlumnos
+        }
+    });
+    res.status(200).json({
+        data: alumno
+    });
+}; */
+const obtener1Alumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = yield prisma.alumnos.findUnique({
+        where: {
+            idAlumnos: idAlumnos,
+        },
+    });
+    if (!alumno) {
+        res.status(404).json({
+            success: false,
+            message: "Alumno no encontrado",
+        });
+        return;
+    }
+    res.status(200).json({
+        success: true,
+        data: alumno,
+    });
 });
 exports.obtener1Alumno = obtener1Alumno;

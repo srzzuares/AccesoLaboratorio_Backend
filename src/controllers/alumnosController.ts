@@ -1,6 +1,7 @@
-import { Express } from "express";
+import { Express ,Request , Response} from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
+
 
 // Crear un usuario alumno
 const agregarAlumno = async (req: Express.Request, res: Express.Response) => {
@@ -56,16 +57,59 @@ const eliminaTodoWarning = async () => {
 }
 
 // Obtener solo un usuario alumno
-const obtener1Alumno = async () => {
+/* const obtener1Alumno = async () => {
     const get2 = await prisma.alumnos.findUnique({
         where: {
             idAlumnos: 2
         }
     })
     console.log('Alumno: ', get2)
-}
+} */
 
+/* const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = parseInt(req.params.idAlumnos);
+    const get2 = await prisma.alumnos.findUnique({
+        where: {
+            idAlumnos: idAlumnos
+        }
+    });
+    res.json({
+        statusCode: 200,
+        data: get2,
+    });
+};
+ */
 
+/* const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = await prisma.alumnos.findUnique({
+        where: {
+            idAlumnos: idAlumnos
+        }
+    });
+    res.status(200).json({
+        data: alumno
+    });
+}; */
 
+const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = await prisma.alumnos.findUnique({
+      where: {
+        idAlumnos: idAlumnos,
+      },
+    });
+    if (!alumno) {
+      res.status(404).json({
+        success: false,
+        message: "Alumno no encontrado",
+      });
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      data: alumno,
+    });
+  };
 
 export { agregarAlumno, obtenerAllAlumno, actualizarAlumno, eliminarAlumno, eliminaTodoWarning, obtener1Alumno };

@@ -11,5 +11,5 @@ ROUTER_Alumno.get('/obtener', alumnosController_1.obtenerAllAlumno);
 ROUTER_Alumno.put('/actualizar', alumnosController_1.actualizarAlumno);
 ROUTER_Alumno.delete('/eliminar', alumnosController_1.eliminarAlumno);
 ROUTER_Alumno.delete('/eliminaTodo', alumnosController_1.eliminaTodoWarning);
-ROUTER_Alumno.get('/obtenerOne', alumnosController_1.obtener1Alumno);
+ROUTER_Alumno.get("/obtenerOne/:idAlumnos", alumnosController_1.obtener1Alumno);
 exports.default = ROUTER_Alumno;
