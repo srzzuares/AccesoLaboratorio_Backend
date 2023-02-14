@@ -12,77 +12,95 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarTodoCarrera = exports.eliminarCarrera = exports.actualizarCarrera = exports.obtenerOneCarrera = exports.obtenerCarrera = exports.crearCarrera = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-var Nivel;
-(function (Nivel) {
-    Nivel["tsu"] = "tsu";
-    Nivel["ingenieria"] = "ingenieria";
-})(Nivel || (Nivel = {}));
-var Estatus;
-(function (Estatus) {
-    Estatus["activo"] = "activo";
-    Estatus["inactivo"] = "inactivo";
-})(Estatus || (Estatus = {}));
 //Crear una Carrera
 const crearCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { Nombre, Abreviatura, Nivel, Estatus } = req.body;
+    const { nombre, abreviatura, nivel, estatus } = req.body;
     const post = yield prisma.carrera.create({
         data: {
-            Nombre: Nombre,
-            Abreviatura: Abreviatura,
-            Nivel: Nivel,
-            Estatus: Estatus,
+            Nombre: nombre,
+            Abreviatura: abreviatura,
+            Nivel: nivel,
+            Estatus: estatus
         }
     });
-    console.log('se ha creado una nueva Carrera: ', post);
+    res.status(200).json({
+        success: true,
+        data: post,
+    });
 });
 exports.crearCarrera = crearCarrera;
 //Obtener todas las Carreras
 const obtenerCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const get1Carr = yield prisma.carrera.findMany();
-    console.log('Son Todos los Registros de Carreras', get1Carr);
+    res.status(200).json({
+        menssage: "Todas las carreras registradas",
+        success: true,
+        data: get1Carr
+    });
 });
 exports.obtenerCarrera = obtenerCarrera;
 //Obtener por Id la Carrera
 const obtenerOneCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const {} = undefined
+    const idAlumnos = Number(req.params.idAlumnos);
     const getIdCarr = yield prisma.carrera.findUnique({
         where: {
-            idCarrera: 1
+            idCarrera: idAlumnos
         }
+    });
+    if (!getIdCarr) {
+        res.status(404).json({
+            success: false,
+            message: "Carrera no encontrada",
+        });
+        return;
+    }
+    res.status(200).json({
+        menssage: "Carrera por ID",
+        success: true,
+        data: getIdCarr
     });
 });
 exports.obtenerOneCarrera = obtenerOneCarrera;
 //Actualizar datos de una Carrera
 const actualizarCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const {} = undefined
+    const idAlumnos = Number(req.params.idAlumnos);
+    const { nombre, abreviatura, nivel, estatus } = req.body;
     const actualizarCarr = yield prisma.carrera.update({
         where: {
-            idCarrera: 1
+            idCarrera: idAlumnos
         },
         data: {
-            Nombre: 'Crystian',
-            Abreviatura: 'Idgs',
-            Nivel: 'ingenieria',
-            Estatus: 'activo',
+            Nombre: nombre,
+            Abreviatura: abreviatura,
+            Nivel: nivel,
+            Estatus: estatus,
         }
     });
-    console.log('Se Actualizaron datos de una Carrera ', actualizarCarr);
+    res.status(200).json({
+        menssage: "Actualizacion Completa",
+        success: true,
+        data: actualizarCarr
+    });
 });
 exports.actualizarCarrera = actualizarCarrera;
 //Eliminar una Carrera
 const eliminarCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const {} = undefined
+    const idAlumnos = Number(req.params.idAlumnos);
     const deleCarr = yield prisma.carrera.delete({
         where: {
-            idCarrera: 1
+            idCarrera: idAlumnos
         }
     });
-    console.log('Se ha eliminado un dato de la Carrera ');
+    res.status(200).json({
+        menssage: "Eliminado Correctamente"
+    });
 });
 exports.eliminarCarrera = eliminarCarrera;
 //Eliminar Registros de la Carrera Full
 const eliminarTodoCarrera = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const deleManyCarr = yield prisma.carrera.deleteMany();
-    console.log('Se ha eliminado todo de Carrera');
+    res.status(200).json({
+        menssage: "Borrado Completado"
+    });
 });
 exports.eliminarTodoCarrera = eliminarTodoCarrera;

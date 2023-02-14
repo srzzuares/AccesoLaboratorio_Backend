@@ -14,6 +14,7 @@ const grupos_1 = __importDefault(require("../routers/grupos"));
 class Server {
     constructor() {
         this.App = (0, express_1.default)();
+        this.App.use(express_1.default.json());
         this.port = process.env.PORT || '3434';
         this.middlewares();
         this.routes();

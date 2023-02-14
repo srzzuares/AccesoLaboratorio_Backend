@@ -13,6 +13,7 @@ class Server {
     private port: string;
     constructor() {
         this.App = express();
+        this.App.use(express.json());
         this.port = process.env.PORT || '3434';
         this.middlewares();
         this.routes();

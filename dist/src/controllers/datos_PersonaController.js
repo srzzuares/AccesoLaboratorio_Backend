@@ -22,9 +22,9 @@ const crearDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             Apellido_M: 'Alv',
             Nombre: 'Joss',
             Genero: 'F',
-            Fecha_Nacimiento: '',
+            Fecha_Nacimiento: new Date(),
             Estatus: 'activo',
-            Foto: '',
+            Foto: 'fotito',
         }
     });
     console.log('se ha creado un dato de una persona ');

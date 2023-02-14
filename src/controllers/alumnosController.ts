@@ -1,102 +1,87 @@
-import { Express ,Request , Response} from "express";
+import { Request , Response} from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 
 // Crear un usuario alumno
-const agregarAlumno = async (req: Express.Request, res: Express.Response) => {
-
+const agregarAlumno = async (req: Request, res: Response) => {
+    const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
     const post1 = await prisma.alumnos.create({
         data: {
-            Matricula: '200527',
-            Estatus: 'activo',
-            IdGrupo: 4,
-            IdDatos_Persona: 5
+            Matricula,
+            Estatus,
+            IdGrupo,
+            IdDatos_Persona
         }
     })
-    console.log('Alumno Creado ', post1)
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post1
+    })
 }
 
 // Obtener todos los usuarios alumnos
-const obtenerAllAlumno = async () => {
+const obtenerAllAlumno = async (req: Request, res: Response) => {
     const get1 = await prisma.alumnos.findMany()
-    console.log('Son todos los Alumnos Registrados: ', get1)
+    res.status(200).json({
+        menssage: "Todos los registros de Alumnos",
+        success: true,
+        data: get1
+    })
 }
 
 // Actualizar un usuario alumno
-const actualizarAlumno = async () => {
-    const update = await prisma.alumnos.update({
+const actualizarAlumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
+    const actAlumn = await prisma.alumnos.update({
         where: {
-            idAlumnos: 1
+            idAlumnos
         },
         data: {
-            Matricula: '200527',
-            Estatus: 'activo',
-            IdGrupo: 2,
-            IdDatos_Persona: 1
+            Matricula,
+            Estatus,
+            IdGrupo,
+            IdDatos_Persona
         },
     })
-    console.log('Se actualizaron datos de: ', update)
+    
+    res.status(200).json({
+        menssage:"Actualizacion Completa",
+        success: true,
+        data: actAlumn
+    })
 
 }
 
 // Eliminar un usuario alumno
-const eliminarAlumno = async () => {
+const eliminarAlumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
     const delete1 = await prisma.alumnos.delete({
         where: {
-            idAlumnos: 1
+            idAlumnos
         },
     })
-
+    res.status(200).json({
+        menssage: "Eliminado Completado",
+        success: true,
+        data: idAlumnos
+    })
 }
 
 // Eliminar todos los alumnos registrados
-const eliminaTodoWarning = async () => {
+const eliminaTodoWarning = async (req: Request, res: Response) => {
     const warning = await prisma.alumnos.deleteMany()
     console.log('Se Elimino todos los Datos de Alumnos')
 }
 
-// Obtener solo un usuario alumno
-/* const obtener1Alumno = async () => {
-    const get2 = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: 2
-        }
-    })
-    console.log('Alumno: ', get2)
-} */
-
-/* const obtener1Alumno = async (req: Request, res: Response) => {
-    const idAlumnos = parseInt(req.params.idAlumnos);
-    const get2 = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: idAlumnos
-        }
-    });
-    res.json({
-        statusCode: 200,
-        data: get2,
-    });
-};
- */
-
-/* const obtener1Alumno = async (req: Request, res: Response) => {
-    const idAlumnos = Number(req.params.idAlumnos);
-    const alumno = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: idAlumnos
-        }
-    });
-    res.status(200).json({
-        data: alumno
-    });
-}; */
 
 const obtener1Alumno = async (req: Request, res: Response) => {
     const idAlumnos = Number(req.params.idAlumnos);
     const alumno = await prisma.alumnos.findUnique({
       where: {
-        idAlumnos: idAlumnos,
+        idAlumnos
       },
     });
     if (!alumno) {

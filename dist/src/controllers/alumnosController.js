@@ -14,92 +14,80 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 // Crear un usuario alumno
 const agregarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
     const post1 = yield prisma.alumnos.create({
         data: {
-            Matricula: '200527',
-            Estatus: 'activo',
-            IdGrupo: 4,
-            IdDatos_Persona: 5
+            Matricula,
+            Estatus,
+            IdGrupo,
+            IdDatos_Persona
         }
     });
-    console.log('Alumno Creado ', post1);
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post1
+    });
 });
 exports.agregarAlumno = agregarAlumno;
 // Obtener todos los usuarios alumnos
-const obtenerAllAlumno = () => __awaiter(void 0, void 0, void 0, function* () {
+const obtenerAllAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const get1 = yield prisma.alumnos.findMany();
-    console.log('Son todos los Alumnos Registrados: ', get1);
+    res.status(200).json({
+        menssage: "Todos los registros de Alumnos",
+        success: true,
+        data: get1
+    });
 });
 exports.obtenerAllAlumno = obtenerAllAlumno;
 // Actualizar un usuario alumno
-const actualizarAlumno = () => __awaiter(void 0, void 0, void 0, function* () {
-    const update = yield prisma.alumnos.update({
+const actualizarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
+    const actAlumn = yield prisma.alumnos.update({
         where: {
-            idAlumnos: 1
+            idAlumnos
         },
         data: {
-            Matricula: '200527',
-            Estatus: 'activo',
-            IdGrupo: 2,
-            IdDatos_Persona: 1
+            Matricula,
+            Estatus,
+            IdGrupo,
+            IdDatos_Persona
         },
     });
-    console.log('Se actualizaron datos de: ', update);
+    res.status(200).json({
+        menssage: "Actualizacion Completa",
+        success: true,
+        data: actAlumn
+    });
 });
 exports.actualizarAlumno = actualizarAlumno;
 // Eliminar un usuario alumno
-const eliminarAlumno = () => __awaiter(void 0, void 0, void 0, function* () {
+const eliminarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idAlumnos = Number(req.params.idAlumnos);
     const delete1 = yield prisma.alumnos.delete({
         where: {
-            idAlumnos: 1
+            idAlumnos
         },
+    });
+    res.status(200).json({
+        menssage: "Eliminado Completado",
+        success: true,
+        data: idAlumnos
     });
 });
 exports.eliminarAlumno = eliminarAlumno;
 // Eliminar todos los alumnos registrados
-const eliminaTodoWarning = () => __awaiter(void 0, void 0, void 0, function* () {
+const eliminaTodoWarning = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const warning = yield prisma.alumnos.deleteMany();
     console.log('Se Elimino todos los Datos de Alumnos');
 });
 exports.eliminaTodoWarning = eliminaTodoWarning;
-// Obtener solo un usuario alumno
-/* const obtener1Alumno = async () => {
-    const get2 = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: 2
-        }
-    })
-    console.log('Alumno: ', get2)
-} */
-/* const obtener1Alumno = async (req: Request, res: Response) => {
-    const idAlumnos = parseInt(req.params.idAlumnos);
-    const get2 = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: idAlumnos
-        }
-    });
-    res.json({
-        statusCode: 200,
-        data: get2,
-    });
-};
- */
-/* const obtener1Alumno = async (req: Request, res: Response) => {
-    const idAlumnos = Number(req.params.idAlumnos);
-    const alumno = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos: idAlumnos
-        }
-    });
-    res.status(200).json({
-        data: alumno
-    });
-}; */
 const obtener1Alumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idAlumnos = Number(req.params.idAlumnos);
     const alumno = yield prisma.alumnos.findUnique({
         where: {
-            idAlumnos: idAlumnos,
+            idAlumnos
         },
     });
     if (!alumno) {

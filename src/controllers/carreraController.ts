@@ -1,96 +1,99 @@
-import { Express, Request, Response } from "express";
-import { PrismaClient, carrera } from "@prisma/client";
+import { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
-enum Nivel {
-  tsu = "tsu",
-  ingenieria = "ingenieria"
-}
-enum Estatus {
-  activo = "activo",
-  inactivo = "inactivo"
-}
-// Falta Seguir resolviendo el Request
-interface typeCarrera {
-  idCarrera: number;
-  Nombre: string;
-  Abreviatura: string;
-  Nivel: Nivel;
-  Estatus: Estatus;
-  /* idCarrera: number;
-  Nombre: string | 'Anonimo';
-  Abreviatura: string | 'IDGs';
-  Nivel: Array<string> | 'tsu';
-  Estatus: Array<string> | 'activo'; */
-}
-
-export interface AuthRequest extends Request {
-  carrera: typeCarrera;
-}
 
 //Crear una Carrera
-const crearCarrera = async (req: AuthRequest, res: Express.Response) => {
-  const { Nombre, Abreviatura, Nivel, Estatus } = req.body;
+const crearCarrera = async (req: Request, res: Response) => {
+  const { nombre, abreviatura, nivel, estatus } = req.body;
   const post = await prisma.carrera.create({
     data: {
-      Nombre: Nombre,
-      Abreviatura: Abreviatura,
-      Nivel: Nivel,
-      Estatus: Estatus,
+      Nombre: nombre,
+      Abreviatura: abreviatura,
+      Nivel: nivel,
+      Estatus: estatus
     }
   })
-  console.log('se ha creado una nueva Carrera: ', post)
+  res.status(200).json({
+    success: true,
+    data: post,
+  });
 }
 
 //Obtener todas las Carreras
-const obtenerCarrera = async (req: Express.Request, res: Express.Response) => {
+const obtenerCarrera = async (req: Request, res: Response) => {
   const get1Carr = await prisma.carrera.findMany()
-  console.log('Son Todos los Registros de Carreras', get1Carr)
+  res.status(200).json({
+    menssage: "Todas las carreras registradas",
+    success: true,
+    data: get1Carr
+  });
 }
 
 
 //Obtener por Id la Carrera
-const obtenerOneCarrera = async (req: Express.Request, res: Express.Request) => {
-  //const {} = undefined
+const obtenerOneCarrera = async (req: Request, res: Response) => {
+  const idAlumnos = Number(req.params.idAlumnos);
   const getIdCarr = await prisma.carrera.findUnique({
     where: {
-      idCarrera: 1
+      idCarrera: idAlumnos
     }
   })
+  if (!getIdCarr) {
+    res.status(404).json({
+      success: false,
+      message: "Carrera no encontrada",
+    });
+    return;
+  }
+  res.status(200).json({
+    menssage: "Carrera por ID",
+    success: true,
+    data: getIdCarr
+  });
 }
 
 //Actualizar datos de una Carrera
-const actualizarCarrera = async (req: Express.Request, res: Express.Response) => {
-  //const {} = undefined
+const actualizarCarrera = async (req: Request, res: Response) => {
+  const idAlumnos = Number(req.params.idAlumnos);
+  const { nombre, abreviatura, nivel, estatus } = req.body;
   const actualizarCarr = await prisma.carrera.update({
     where: {
-      idCarrera: 1
+      idCarrera: idAlumnos
     },
     data: {
-      Nombre: 'Crystian',
-      Abreviatura: 'Idgs',
-      Nivel: 'ingenieria',
-      Estatus: 'activo',
+      Nombre: nombre,
+      Abreviatura: abreviatura,
+      Nivel: nivel,
+      Estatus: estatus,
     }
   })
-  console.log('Se Actualizaron datos de una Carrera ', actualizarCarr)
+  res.status(200).json({
+    menssage: "Actualizacion Completa",
+    success: true,
+    data: actualizarCarr
+  })
 }
 
 //Eliminar una Carrera
-const eliminarCarrera = async (req: Express.Request, res: Express.Response) => {
-  //const {} = undefined
+const eliminarCarrera = async (req: Request, res: Response) => {
+  const idAlumnos = Number(req.params.idAlumnos);
   const deleCarr = await prisma.carrera.delete({
     where: {
-      idCarrera: 1
+      idCarrera: idAlumnos
     }
   })
-  console.log('Se ha eliminado un dato de la Carrera ')
+  res.status(200).json({
+    menssage: "Eliminado Correctamente"
+  })
 }
 
 //Eliminar Registros de la Carrera Full
-const eliminarTodoCarrera = async (req: Express.Request, res: Express.Response) => {
+const eliminarTodoCarrera = async (req: Request, res: Response) => {
   const deleManyCarr = await prisma.carrera.deleteMany()
-  console.log('Se ha eliminado todo de Carrera')
+  res.status(200).json({
+    menssage: "Borrado Completado"
+  })
 }
 
 
