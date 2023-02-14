@@ -14,19 +14,19 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 // Crea una clase nueva
 const crearClases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const {} = undefined
+    const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
     const post1 = yield prisma.clases.create({
         data: {
-            Dia: 'lunes',
-            Hora_Inicio: 'activo',
-            Hora_Final: 'activo',
-            Actividad: 'CRUD',
-            Materia: 'DWP',
-            Estatus: 'activo',
-            IdPeriodo: 1,
-            IdLaboratorio: 1,
-            IdPersonal: 1,
-            IdGrupo: 1,
+            Dia,
+            Hora_Inicio,
+            Hora_Final,
+            Actividad,
+            Materia,
+            Estatus,
+            IdPeriodo,
+            IdLaboratorio,
+            IdPersonal,
+            IdGrupo,
         }
     });
     console.log('Se ha creado una nueva Clase ', post1);
