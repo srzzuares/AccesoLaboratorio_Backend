@@ -19,64 +19,87 @@ const crearClases = async (req: Request, res: Response) => {
       IdGrupo,
     }
   })
-  console.log('Se ha creado una nueva Clase ', post1)
+  res.status(200).json({
+    success: true,
+    menssage: "Creado _",
+    data: post1
+  })
 }
 
 // Obtiene todos los registros de Clases
 const obtenerClases = async (req: Request, res: Response) => {
   const getTodoCla = await prisma.clases.findMany()
-  console.log('Son todos los registros de clases', getTodoCla)
+  res.status(200).json({
+    Success: true,
+    menssage: "Datos Completos de la Tabla",
+    data: getTodoCla
+  })
 }
 
 // Obtiene un dato por medio de Id
 const obtenerOneClases = async (req: Request, res: Response) => {
-  //const {} = undefined
+  const idClases = Number(req.params.idClases)
   const getOneCla = await prisma.clases.findUnique({
     where: {
-      idClases: 1
+      idClases
     }
   })
-  console.log('Dato Id de Clase ', getOneCla)
+  res.status(200).json({
+    success: true,
+    menssage: "Clase encontrada ",
+    data: getOneCla
+  })
 }
 
 // Actualiza un dato de Clases
 const actualizarClases = async (req: Request, res: Response) => {
-  //const {} = undefined
+  const idClases = Number(req.params.idClases)
+  const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
   const actualizarCla = await prisma.clases.update({
     where: {
-      idClases: 1
+      idClases
     },
     data: {
-      Dia: 'martes',
-      Hora_Inicio: 'activo',
-      Hora_Final: 'activo',
-      Actividad: 'CRUD',
-      Materia: 'DWP',
-      Estatus: 'activo',
-      IdPeriodo: 1,
-      IdLaboratorio: 1,
-      IdPersonal: 1,
-      IdGrupo: 1,
+      Dia,
+      Hora_Inicio,
+      Hora_Final,
+      Actividad,
+      Materia,
+      Estatus,
+      IdPeriodo,
+      IdLaboratorio,
+      IdPersonal,
+      IdGrupo
     }
   })
-  console.log('Se han actualizadi datos de Clases ', actualizarClases)
-}
+  res.status(200).json({
+    menssage: "Actualizado",
+    success: true,
+    data: actualizarCla
+  })
+  }
 
 // Elimina un dato por medio de Id
 const eliminarClases = async (req: Request, res: Response) => {
-  //const {} = undefined
+  const idClases = Number(req.params.idClases)
   const deleOneCla = await prisma.clases.delete({
     where: {
-      idClases: 1
+      idClases
     }
   })
-  console.log('Se ha eliminado un dato de Clases')
+  res.status(200).json({
+    menssage: "Se ha Eliminado",
+    success:true
+  })
 }
 
 // Elimina todos los datos de clases
 const eliminarTodoClases = async (req: Request, res: Response) => {
   const deleManyCla = await prisma.clases.deleteMany()
-  console.log('Se han eliminado todo los datos de Clases')
+  res.status(200).json({
+    menssage: "Se ha eliminado todo",
+    success: true
+  })
 }
 
 
