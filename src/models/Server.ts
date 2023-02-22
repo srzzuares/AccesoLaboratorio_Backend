@@ -6,7 +6,7 @@ import ROUTER_Carrera from "../routers/carrera";
 import ROUTER_Clases from '../routers/clases'
 import ROUTER_Daper from "../routers/datos_Persona"
 import ROUTER_Grupos from "../routers/grupos"
-
+import ROUTER_Lab from "../routers/laboratorio"
 class Server {
 
     private App: Application;
@@ -44,7 +44,7 @@ class Server {
         this.App.use('/clases', ROUTER_Clases)
         this.App.use('/datosPersonales', ROUTER_Daper)
         this.App.use('/grupos', ROUTER_Grupos)
-
+        this.App.use('/laboratorios', ROUTER_Lab)
     }
 }
 

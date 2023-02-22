@@ -2,7 +2,6 @@ import { Request , Response} from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
-
 // Crear un usuario alumno
 const agregarAlumno = async (req: Request, res: Response) => {
     const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;

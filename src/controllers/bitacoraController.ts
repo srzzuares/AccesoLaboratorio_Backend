@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
+
 //Agregar un dato a Bitacora
 const agregarBitadora = async (req: Request, res: Response) => {
     const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
@@ -27,7 +28,7 @@ const agregarBitadora = async (req: Request, res: Response) => {
 // Obetener todos los datos de Bitacora
 const obtenerBitacora = async (req: Request, res: Response) => {
     const getBit = await prisma.bitacora.findMany()
-    console.log('Estos son los registros de la Bitacora ', getBit)
+    // console.log('Estos son los registros de la Bitacora ', getBit)
     res.status(200).json({
         menssage: "Todos los registros de Bitacora",
         success: true,

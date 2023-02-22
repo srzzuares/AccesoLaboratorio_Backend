@@ -36,7 +36,7 @@ exports.agregarBitadora = agregarBitadora;
 // Obetener todos los datos de Bitacora
 const obtenerBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getBit = yield prisma.bitacora.findMany();
-    console.log('Estos son los registros de la Bitacora ', getBit);
+    // console.log('Estos son los registros de la Bitacora ', getBit)
     res.status(200).json({
         menssage: "Todos los registros de Bitacora",
         success: true,

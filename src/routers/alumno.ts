@@ -3,7 +3,6 @@ import Router from "express";
 
 const ROUTER_Alumno = Router();
 
-
 ROUTER_Alumno.post('/agregar', agregarAlumno)
 ROUTER_Alumno.get('/obtener', obtenerAllAlumno)
 ROUTER_Alumno.put('/actualizar', actualizarAlumno)

@@ -11,6 +11,7 @@ const carrera_1 = __importDefault(require("../routers/carrera"));
 const clases_1 = __importDefault(require("../routers/clases"));
 const datos_Persona_1 = __importDefault(require("../routers/datos_Persona"));
 const grupos_1 = __importDefault(require("../routers/grupos"));
+const laboratorio_1 = __importDefault(require("../routers/laboratorio"));
 class Server {
     constructor() {
         this.App = (0, express_1.default)();
@@ -39,6 +40,7 @@ class Server {
         this.App.use('/clases', clases_1.default);
         this.App.use('/datosPersonales', datos_Persona_1.default);
         this.App.use('/grupos', grupos_1.default);
+        this.App.use('/laboratorios', laboratorio_1.default);
     }
 }
 exports.default = Server;
