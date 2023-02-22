@@ -45,3 +45,18 @@ npx prisma migrate dev --name init
 
 
 
+
+:JSON
+seran los Json para poder interactuar en en Body CRUD
+
+De ALUMNOS
+
+{
+    "Matricula": "200931",
+    "Estatus": "activo",
+    "IdGrupo": 2,
+    "IdDatos_Persona": 2
+}
+
+
+

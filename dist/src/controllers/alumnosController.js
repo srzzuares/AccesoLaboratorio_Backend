@@ -88,7 +88,7 @@ const obtener1Alumno = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const alumno = yield prisma.alumnos.findUnique({
         where: {
             idAlumnos
-        },
+        }
     });
     if (!alumno) {
         res.status(404).json({

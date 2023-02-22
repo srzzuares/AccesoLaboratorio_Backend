@@ -81,7 +81,7 @@ const obtener1Alumno = async (req: Request, res: Response) => {
     const alumno = await prisma.alumnos.findUnique({
         where: {
             idAlumnos
-        },
+        }
     });
     if (!alumno) {
         res.status(404).json({
