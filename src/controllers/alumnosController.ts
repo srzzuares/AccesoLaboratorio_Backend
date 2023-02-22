@@ -1,4 +1,4 @@
-import { Request , Response} from "express";
+import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
@@ -45,9 +45,9 @@ const actualizarAlumno = async (req: Request, res: Response) => {
             IdDatos_Persona
         },
     })
-    
+
     res.status(200).json({
-        menssage:"Actualizacion Completa",
+        menssage: "Actualizacion Completa",
         success: true,
         data: actAlumn
     })
@@ -79,21 +79,21 @@ const eliminaTodoWarning = async (req: Request, res: Response) => {
 const obtener1Alumno = async (req: Request, res: Response) => {
     const idAlumnos = Number(req.params.idAlumnos);
     const alumno = await prisma.alumnos.findUnique({
-      where: {
-        idAlumnos
-      },
+        where: {
+            idAlumnos
+        },
     });
     if (!alumno) {
-      res.status(404).json({
-        success: false,
-        message: "Alumno no encontrado",
-      });
-      return;
+        res.status(404).json({
+            success: false,
+            message: "Alumno no encontrado",
+        });
+        return;
     }
     res.status(200).json({
-      success: true,
-      data: alumno,
+        success: true,
+        data: alumno,
     });
-  };
+};
 
 export { agregarAlumno, obtenerAllAlumno, actualizarAlumno, eliminarAlumno, eliminaTodoWarning, obtener1Alumno };

@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 const crearDaper = async (req: Request, res: Response) => {
   const { idDatos_persona, Titulo_Profesional, Apellido_P, Apellido_M, Nombre,
-     Genero, Fecha_Nacimiento, Estatus, Foto} = req.body;
+    Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
   const post = await prisma.datos_persona.create({
     data: {
       idDatos_persona,
@@ -61,11 +61,11 @@ const obtenerOneDaper = async (req: Request, res: Response) => {
 const actualizarDaper = async (req: Request, res: Response) => {
   const idDatos_persona = Number(req.params.idDatos_persona);
   const { Titulo_Profesional, Apellido_P, Apellido_M, Nombre,
-     Genero, Fecha_Nacimiento, Estatus, Foto} = req.body;
+    Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
   const putActualizarDaper = await prisma.datos_persona.update({
     where: {
       idDatos_persona
-    },data: {
+    }, data: {
       Titulo_Profesional,
       Apellido_P,
       Apellido_M,
@@ -86,25 +86,25 @@ const actualizarDaper = async (req: Request, res: Response) => {
 
 
 const eliminarDaper = async (req: Request, res: Response) => {
-const idDatos_persona = Number(req.params.idDatos_persona)
-const deleteDaPer = await prisma.datos_persona.delete({
-  where: {
-    idDatos_persona
-  }
-})
-res.status(200).json({
-  menssage: "Se Elimino",
-  success: true
-})
+  const idDatos_persona = Number(req.params.idDatos_persona)
+  const deleteDaPer = await prisma.datos_persona.delete({
+    where: {
+      idDatos_persona
+    }
+  })
+  res.status(200).json({
+    menssage: "Se Elimino",
+    success: true
+  })
 }
 
 
 const eliminarTodoDaper = async (req: Request, res: Response) => {
-const deleteManyDaper = await prisma.datos_persona.deleteMany()
-res.status(200).json({
-  menssage: "Se Elimino Todo",
-  success: true
-})
+  const deleteManyDaper = await prisma.datos_persona.deleteMany()
+  res.status(200).json({
+    menssage: "Se Elimino Todo",
+    success: true
+  })
 }
 
 

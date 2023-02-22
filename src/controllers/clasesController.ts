@@ -77,7 +77,7 @@ const actualizarClases = async (req: Request, res: Response) => {
     success: true,
     data: actualizarCla
   })
-  }
+}
 
 // Elimina un dato por medio de Id
 const eliminarClases = async (req: Request, res: Response) => {
@@ -89,7 +89,7 @@ const eliminarClases = async (req: Request, res: Response) => {
   })
   res.status(200).json({
     menssage: "Se ha Eliminado",
-    success:true
+    success: true
   })
 }
 

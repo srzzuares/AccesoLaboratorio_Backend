@@ -40,6 +40,7 @@ No Utilizen la rama Master / Main
 ----------Cosas Que Aun Faltan en el proyecto:
 
 Instalar paquetes Prisma y enlazar e base de datos de Mysql Workbench
+Cada ves que quieran la base de datos localmente, solo ejecuten el codigo en la terminal y cambian el .env a su direccion de mysql
 npx prisma migrate dev --name init
 
 

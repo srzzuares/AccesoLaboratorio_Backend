@@ -47,16 +47,16 @@ const obtenerBitacoraOne = async (req: Request, res: Response) => {
     })
     if (!getBitOne) {
         res.status(404).json({
-          success: false,
-          message: "Bitacora no encontrado",
+            success: false,
+            message: "Bitacora no encontrado",
         });
         return;
-      }
-      res.status(200).json({
+    }
+    res.status(200).json({
         message: "Bitacora encontrada",
         success: true,
         data: getBitOne,
-      });
+    });
 }
 
 
@@ -77,10 +77,10 @@ const actualizarBitacora = async (req: Request, res: Response) => {
             Fecha_Salida,
             Bitacoracol
         }
-        
+
     })
     res.status(200).json({
-        menssage:"Actualizacion Completa",
+        menssage: "Actualizacion Completa",
         success: true,
         data: actualizarBit
     })
@@ -96,7 +96,7 @@ const eliminarBitacoraOne = async (req: Request, res: Response) => {
         }
     })
     res.status(200).json({
-        menssage:"Elimininado Completado",
+        menssage: "Elimininado Completado",
         success: true
     })
 }
@@ -106,7 +106,7 @@ const eliminarBitacoraOne = async (req: Request, res: Response) => {
 const eliminarBitacoraTodo = async (req: Request, res: Response) => {
     const eliminarTodoBit = await prisma.bitacora.deleteMany()
     res.status(200).json({
-        menssage:"Elimininado Completado de Todo",
+        menssage: "Elimininado Completado de Todo",
         success: true
     })
 }
