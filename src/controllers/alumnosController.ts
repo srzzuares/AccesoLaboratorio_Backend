@@ -1,9 +1,18 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { validationResult } from 'express-validator';
+import { PrismaClient,alumnos } from "@prisma/client";
 const prisma = new PrismaClient()
 
 // Crear un usuario alumno
 const agregarAlumno = async (req: Request, res: Response) => {
+    let errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.json({
+        errors: errors.array()
+        })
+    }
     const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
     const post1 = await prisma.alumnos.create({
         data: {

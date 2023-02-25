@@ -10,10 +10,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtener1Alumno = exports.eliminaTodoWarning = exports.eliminarAlumno = exports.actualizarAlumno = exports.obtenerAllAlumno = exports.agregarAlumno = void 0;
+const express_validator_1 = require("express-validator");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 // Crear un usuario alumno
 const agregarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let errors = (0, express_validator_1.validationResult)(req);
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.json({
+            errors: errors.array()
+        });
+    }
     const { Matricula, Estatus, IdGrupo, IdDatos_Persona } = req.body;
     const post1 = yield prisma.alumnos.create({
         data: {
