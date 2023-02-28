@@ -16,7 +16,23 @@ const validarRegistro = () => {
             .not()
             .isEmpty()
             .withMessage('Hola?, Esta Vacio este campo.')
+            .isLowercase()
             .isIn(['activo', 'inactivo'])
+            .withMessage('Solo es Activo e Inactivo.'),
+        (0, express_validator_1.body)('IdGrupo')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo')
+            .isInt()
+            .withMessage('Es de tipo Numerico'),
+        (0, express_validator_1.body)('IdDatos_Persona')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo')
+            .isInt()
+            .withMessage('Es de tipo Numerico')
     ];
 };
 exports.validarRegistro = validarRegistro;
