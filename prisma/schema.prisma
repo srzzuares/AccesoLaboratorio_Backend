@@ -94,7 +94,7 @@ model laboratorio {
   IdPersonal    Int?
 
   @@index([IdPersonal], map: "idPersonal_idx")
-}
+} 
 
 model periodo {
   idPeriodo    Int             @id @default(autoincrement())
