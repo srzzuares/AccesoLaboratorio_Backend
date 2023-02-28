@@ -16,6 +16,36 @@ const validarRegistro = () => {
             .not()
             .isEmpty()
             .withMessage('Hola?, Esta Vacio este campo.')
+            .toLowerCase()
+            .isIn(['activo', 'inactivo'])
+            .withMessage('Solo es Activo e Inactivo.'),
+        (0, express_validator_1.body)('IdGrupo')
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo'),
+        (0, express_validator_1.body)('IdDatos_Persona')
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo')
+    ];
+};
+exports.validarRegistro = validarRegistro;
+const validarActualizacion = () => {
+    return [
+        (0, express_validator_1.body)('idAlumnos')
+            .isInt(),
+        (0, express_validator_1.body)('Matricula')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo.')
+            .isLength({ max: 6 })
+            .withMessage('Solo es de 6 Caracteres.'),
+        (0, express_validator_1.body)('Estatus')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo.')
             .isLowercase()
             .isIn(['activo', 'inactivo'])
             .withMessage('Solo es Activo e Inactivo.'),
@@ -35,6 +65,4 @@ const validarRegistro = () => {
             .withMessage('Es de tipo Numerico')
     ];
 };
-exports.validarRegistro = validarRegistro;
-const validarActualizacion = () => { };
 exports.validarActualizacion = validarActualizacion;
