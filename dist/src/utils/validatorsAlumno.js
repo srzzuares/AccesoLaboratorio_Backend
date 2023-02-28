@@ -10,7 +10,13 @@ const validarRegistro = () => {
             .isEmpty()
             .withMessage('Hola?, Esta Vacio este campo.')
             .isLength({ max: 6 })
-            .withMessage('Solo es de 6 Caracteres.')
+            .withMessage('Solo es de 6 Caracteres.'),
+        (0, express_validator_1.body)('Estatus')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Hola?, Esta Vacio este campo.')
+            .isIn(['activo', 'inactivo'])
     ];
 };
 exports.validarRegistro = validarRegistro;
