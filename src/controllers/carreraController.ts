@@ -2,6 +2,38 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
+//Obtener todas las Carreras
+const obtenerCarrera = async (req: Request, res: Response) => {
+  const get1Carr = await prisma.carrera.findMany()
+  res.status(200).json({
+    menssage: "Todas las carreras registradas",
+    success: true,
+    data: get1Carr
+  });
+}
+
+
+//Obtener por Id la Carrera
+const obtenerOneCarrera = async (req: Request, res: Response) => {
+  const idCarrera = Number(req.params.idCarrera);
+  const getIdCarr = await prisma.carrera.findUnique({
+    where: {
+      idCarrera: idCarrera
+    }
+  })
+  if (!getIdCarr) {
+    res.status(404).json({
+      success: false,
+      message: "Carrera no encontrada",
+    });
+    return;
+  }
+  res.status(200).json({
+    menssage: "Carrera por ID",
+    success: true,
+    data: getIdCarr
+  });
+}
 
 //Crear una Carrera
 const crearCarrera = async (req: Request, res: Response) => {
@@ -20,46 +52,15 @@ const crearCarrera = async (req: Request, res: Response) => {
   });
 }
 
-//Obtener todas las Carreras
-const obtenerCarrera = async (req: Request, res: Response) => {
-  const get1Carr = await prisma.carrera.findMany()
-  res.status(200).json({
-    menssage: "Todas las carreras registradas",
-    success: true,
-    data: get1Carr
-  });
-}
 
-
-//Obtener por Id la Carrera
-const obtenerOneCarrera = async (req: Request, res: Response) => {
-  const idAlumnos = Number(req.params.idAlumnos);
-  const getIdCarr = await prisma.carrera.findUnique({
-    where: {
-      idCarrera: idAlumnos
-    }
-  })
-  if (!getIdCarr) {
-    res.status(404).json({
-      success: false,
-      message: "Carrera no encontrada",
-    });
-    return;
-  }
-  res.status(200).json({
-    menssage: "Carrera por ID",
-    success: true,
-    data: getIdCarr
-  });
-}
 
 //Actualizar datos de una Carrera
 const actualizarCarrera = async (req: Request, res: Response) => {
-  const idAlumnos = Number(req.params.idAlumnos);
+  const idCarrera = Number(req.params.idCarrera);
   const { nombre, abreviatura, nivel, estatus } = req.body;
   const actualizarCarr = await prisma.carrera.update({
     where: {
-      idCarrera: idAlumnos
+      idCarrera: idCarrera
     },
     data: {
       Nombre: nombre,
@@ -77,10 +78,10 @@ const actualizarCarrera = async (req: Request, res: Response) => {
 
 //Eliminar una Carrera
 const eliminarCarrera = async (req: Request, res: Response) => {
-  const idAlumnos = Number(req.params.idAlumnos);
+  const idCarrera = Number(req.params.idCarrera);
   const deleCarr = await prisma.carrera.delete({
     where: {
-      idCarrera: idAlumnos
+      idCarrera: idCarrera
     }
   })
   res.status(200).json({

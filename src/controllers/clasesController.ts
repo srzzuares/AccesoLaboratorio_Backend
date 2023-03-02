@@ -2,30 +2,6 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
-// Crea una clase nueva
-const crearClases = async (req: Request, res: Response) => {
-  const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
-  const post1 = await prisma.clases.create({
-    data: {
-      Dia,
-      Hora_Inicio,
-      Hora_Final,
-      Actividad,
-      Materia,
-      Estatus,
-      IdPeriodo,
-      IdLaboratorio,
-      IdPersonal,
-      IdGrupo,
-    }
-  })
-  res.status(200).json({
-    success: true,
-    menssage: "Creado _",
-    data: post1
-  })
-}
-
 // Obtiene todos los registros de Clases
 const obtenerClases = async (req: Request, res: Response) => {
   const getTodoCla = await prisma.clases.findMany()
@@ -50,6 +26,32 @@ const obtenerOneClases = async (req: Request, res: Response) => {
     data: getOneCla
   })
 }
+
+
+// Crea una clase nueva
+const crearClases = async (req: Request, res: Response) => {
+  const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
+  const post1 = await prisma.clases.create({
+    data: {
+      Dia,
+      Hora_Inicio,
+      Hora_Final,
+      Actividad,
+      Materia,
+      Estatus,
+      IdPeriodo,
+      IdLaboratorio,
+      IdPersonal,
+      IdGrupo,
+    }
+  })
+  res.status(200).json({
+    success: true,
+    menssage: "Creado _",
+    data: post1
+  })
+}
+
 
 // Actualiza un dato de Clases
 const actualizarClases = async (req: Request, res: Response) => {

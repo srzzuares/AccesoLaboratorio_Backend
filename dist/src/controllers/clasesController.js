@@ -12,30 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarTodoClases = exports.eliminarClases = exports.actualizarClases = exports.obtenerOneClases = exports.obtenerClases = exports.crearClases = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-// Crea una clase nueva
-const crearClases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
-    const post1 = yield prisma.clases.create({
-        data: {
-            Dia,
-            Hora_Inicio,
-            Hora_Final,
-            Actividad,
-            Materia,
-            Estatus,
-            IdPeriodo,
-            IdLaboratorio,
-            IdPersonal,
-            IdGrupo,
-        }
-    });
-    res.status(200).json({
-        success: true,
-        menssage: "Creado _",
-        data: post1
-    });
-});
-exports.crearClases = crearClases;
 // Obtiene todos los registros de Clases
 const obtenerClases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getTodoCla = yield prisma.clases.findMany();
@@ -61,6 +37,30 @@ const obtenerOneClases = (req, res) => __awaiter(void 0, void 0, void 0, functio
     });
 });
 exports.obtenerOneClases = obtenerOneClases;
+// Crea una clase nueva
+const crearClases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { Dia, Hora_Inicio, Hora_Final, Actividad, Materia, Estatus, IdPeriodo, IdLaboratorio, IdPersonal, IdGrupo } = req.body;
+    const post1 = yield prisma.clases.create({
+        data: {
+            Dia,
+            Hora_Inicio,
+            Hora_Final,
+            Actividad,
+            Materia,
+            Estatus,
+            IdPeriodo,
+            IdLaboratorio,
+            IdPersonal,
+            IdGrupo,
+        }
+    });
+    res.status(200).json({
+        success: true,
+        menssage: "Creado _",
+        data: post1
+    });
+});
+exports.crearClases = crearClases;
 // Actualiza un dato de Clases
 const actualizarClases = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idClases = Number(req.params.idClases);

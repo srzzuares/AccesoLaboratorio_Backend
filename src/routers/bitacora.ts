@@ -3,12 +3,13 @@ import Router from "express";
 
 const ROUTER = Router();
 
+ROUTER.get('/obtener', obtenerBitacora)
+ROUTER.get('/obtenerOne/:idBitacora', obtenerBitacoraOne)
 ROUTER.post('/crear', agregarBitadora)
-ROUTER.post('/obtener', obtenerBitacora)
-ROUTER.post('/obtenerOne', obtenerBitacoraOne)
-ROUTER.post('/actualizarBit', actualizarBitacora)
-ROUTER.post('/eliminarBit', eliminarBitacoraOne)
-ROUTER.post('/eliminarTodo', eliminarBitacoraTodo)
+ROUTER.put('/actualizarBit/:idBitacora', actualizarBitacora)
+ROUTER.delete('/eliminarBit/:idBitacora', eliminarBitacoraOne)
+ROUTER.delete('/eliminarTodo', eliminarBitacoraTodo)
+
 
 
 export default ROUTER;

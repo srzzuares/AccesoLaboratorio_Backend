@@ -12,27 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarBitacoraTodo = exports.eliminarBitacoraOne = exports.actualizarBitacora = exports.obtenerBitacoraOne = exports.obtenerBitacora = exports.agregarBitadora = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-//Agregar un dato a Bitacora
-const agregarBitadora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
-    const post = yield prisma.bitacora.create({
-        data: {
-            IdPersonal,
-            IdLaboratorio,
-            IdAlumno,
-            IdRecursoLaboratorio,
-            Fecha_Entrada,
-            Fecha_Salida,
-            Bitacoracol
-        }
-    });
-    res.status(200).json({
-        menssage: "Creacion completa",
-        success: true,
-        data: post
-    });
-});
-exports.agregarBitadora = agregarBitadora;
 // Obetener todos los datos de Bitacora
 const obtenerBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getBit = yield prisma.bitacora.findMany();
@@ -66,6 +45,27 @@ const obtenerBitacoraOne = (req, res) => __awaiter(void 0, void 0, void 0, funct
     });
 });
 exports.obtenerBitacoraOne = obtenerBitacoraOne;
+//Agregar un dato a Bitacora
+const agregarBitadora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
+    const post = yield prisma.bitacora.create({
+        data: {
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
+        }
+    });
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post
+    });
+});
+exports.agregarBitadora = agregarBitadora;
 // Actualizar un elemento de Bitacora
 const actualizarBitacora = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idBitacora = Number(req.params.idBitacora);

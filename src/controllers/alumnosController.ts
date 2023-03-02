@@ -3,6 +3,38 @@ import { validationResult } from 'express-validator';
 import { PrismaClient,alumnos } from "@prisma/client";
 const prisma = new PrismaClient()
 
+// Obtener todos los usuarios alumnos
+const obtenerAllAlumno = async (req: Request, res: Response) => {
+    const get1 = await prisma.alumnos.findMany()
+    res.status(200).json({
+        menssage: "Todos los registros de Alumnos",
+        success: true,
+        data: get1
+    })
+}
+
+// Obtener un usuario alumno
+const obtener1Alumno = async (req: Request, res: Response) => {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = await prisma.alumnos.findUnique({
+        where: {
+            idAlumnos
+        }
+    });
+    if (!alumno) {
+        res.status(404).json({
+            success: false,
+            message: "Alumno no encontrado",
+        });
+        return;
+    }
+    res.status(200).json({
+        success: true,
+        data: alumno,
+    });
+};
+
+
 // Crear un usuario alumno
 const agregarAlumno = async (req: Request, res: Response) => {
     let errors = validationResult(req)
@@ -29,15 +61,7 @@ const agregarAlumno = async (req: Request, res: Response) => {
     })
 }
 
-// Obtener todos los usuarios alumnos
-const obtenerAllAlumno = async (req: Request, res: Response) => {
-    const get1 = await prisma.alumnos.findMany()
-    res.status(200).json({
-        menssage: "Todos los registros de Alumnos",
-        success: true,
-        data: get1
-    })
-}
+
 
 // Actualizar un usuario alumno
 const actualizarAlumno = async (req: Request, res: Response) => {
@@ -85,24 +109,5 @@ const eliminaTodoWarning = async (req: Request, res: Response) => {
 }
 
 
-const obtener1Alumno = async (req: Request, res: Response) => {
-    const idAlumnos = Number(req.params.idAlumnos);
-    const alumno = await prisma.alumnos.findUnique({
-        where: {
-            idAlumnos
-        }
-    });
-    if (!alumno) {
-        res.status(404).json({
-            success: false,
-            message: "Alumno no encontrado",
-        });
-        return;
-    }
-    res.status(200).json({
-        success: true,
-        data: alumno,
-    });
-};
 
 export { agregarAlumno, obtenerAllAlumno, actualizarAlumno, eliminarAlumno, eliminaTodoWarning, obtener1Alumno };

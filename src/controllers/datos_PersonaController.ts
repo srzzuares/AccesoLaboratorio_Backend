@@ -2,28 +2,6 @@ import { Request, Response } from "express";
 import { PrismaClient, datos_persona } from "@prisma/client";
 const prisma = new PrismaClient()
 
-const crearDaper = async (req: Request, res: Response) => {
-  const { idDatos_persona, Titulo_Profesional, Apellido_P, Apellido_M, Nombre,
-    Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
-  const post = await prisma.datos_persona.create({
-    data: {
-      idDatos_persona,
-      Titulo_Profesional,
-      Apellido_P,
-      Apellido_M,
-      Nombre,
-      Genero,
-      Fecha_Nacimiento,
-      Estatus,
-      Foto
-    }
-  })
-  res.status(200).json({
-    menssage: "Se ha creado",
-    success: true,
-    data: post
-  })
-}
 
 // Obtener Todo Personal
 const obtenerDaper = async (req: Request, res: Response) => {
@@ -35,7 +13,7 @@ const obtenerDaper = async (req: Request, res: Response) => {
   })
 }
 
-
+// obtener un personal
 const obtenerOneDaper = async (req: Request, res: Response) => {
   const idDatos_persona = Number(req.params.idDatos_persona);
   const getOneDaper = await prisma.datos_persona.findUnique({
@@ -56,6 +34,30 @@ const obtenerOneDaper = async (req: Request, res: Response) => {
     data: getOneDaper
   });
 }
+const crearDaper = async (req: Request, res: Response) => {
+  const {  Titulo_Profesional, Apellido_P, Apellido_M, Nombre,
+    Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
+  const post = await prisma.datos_persona.create({
+    data: {
+
+      Titulo_Profesional,
+      Apellido_P,
+      Apellido_M,
+      Nombre,
+      Genero,
+      Fecha_Nacimiento,
+      Estatus,
+      Foto
+    }
+  })
+  res.status(200).json({
+    menssage: "Se ha creado",
+    success: true,
+    data: post
+  })
+}
+
+
 
 
 const actualizarDaper = async (req: Request, res: Response) => {

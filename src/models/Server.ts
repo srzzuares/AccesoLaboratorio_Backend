@@ -7,6 +7,9 @@ import ROUTER_Clases from '../routers/clases'
 import ROUTER_Daper from "../routers/datos_Persona"
 import ROUTER_Grupos from "../routers/grupos"
 import ROUTER_Lab from "../routers/laboratorio"
+import ROUTER_Periodo from "../routers/periodo"
+import ROUTER_personal from "../routers/personal";
+import ROUTER_recursosLab from "../routers/recursos_Laboratorio";
 class Server {
 
     private App: Application;
@@ -40,11 +43,14 @@ class Server {
         this.App.use('/', EJEMPLO_ROUTER)
         this.App.use('/alumno', ROUTER_Alumno)
         this.App.use('/bitacora', ROUTER_Bitacora)
-        this.App.use('/carreras', ROUTER_Carrera)
-        this.App.use('/clases', ROUTER_Clases)
+        this.App.use('/carrera', ROUTER_Carrera)
+        this.App.use('/clase', ROUTER_Clases)
         this.App.use('/datosPersonales', ROUTER_Daper)
-        this.App.use('/grupos', ROUTER_Grupos)
-        this.App.use('/laboratorios', ROUTER_Lab)
+        this.App.use('/grupo', ROUTER_Grupos)
+        this.App.use('/laboratorio', ROUTER_Lab)
+        this.App.use('/periodo', ROUTER_Periodo)
+        this.App.use('/personal', ROUTER_personal)
+        this.App.use('/recursosLab', ROUTER_recursosLab)
     }
 }
 

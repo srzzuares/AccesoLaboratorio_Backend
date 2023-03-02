@@ -3,11 +3,11 @@ import Router from "express";
 
 const ROUTER = Router();
 
-ROUTER.post('/crear', crearCarrera)
 ROUTER.get('/obtener', obtenerCarrera)
-ROUTER.get('/obtenerOne', obtenerOneCarrera)
-ROUTER.put('/actualizar', actualizarCarrera)
-ROUTER.delete('/eliminar', eliminarCarrera)
+ROUTER.get('/obtenerOne/:idCarrera', obtenerOneCarrera)
+ROUTER.post('/crear', crearCarrera)
+ROUTER.put('/actualizar/:idCarrera', actualizarCarrera)
+ROUTER.delete('/eliminar/:idCarrera', eliminarCarrera)
 ROUTER.delete('/eliminarTodo', eliminarTodoCarrera)
 
 

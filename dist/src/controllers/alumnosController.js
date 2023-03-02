@@ -13,6 +13,37 @@ exports.obtener1Alumno = exports.eliminaTodoWarning = exports.eliminarAlumno = e
 const express_validator_1 = require("express-validator");
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+// Obtener todos los usuarios alumnos
+const obtenerAllAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const get1 = yield prisma.alumnos.findMany();
+    res.status(200).json({
+        menssage: "Todos los registros de Alumnos",
+        success: true,
+        data: get1
+    });
+});
+exports.obtenerAllAlumno = obtenerAllAlumno;
+// Obtener un usuario alumno
+const obtener1Alumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idAlumnos = Number(req.params.idAlumnos);
+    const alumno = yield prisma.alumnos.findUnique({
+        where: {
+            idAlumnos
+        }
+    });
+    if (!alumno) {
+        res.status(404).json({
+            success: false,
+            message: "Alumno no encontrado",
+        });
+        return;
+    }
+    res.status(200).json({
+        success: true,
+        data: alumno,
+    });
+});
+exports.obtener1Alumno = obtener1Alumno;
 // Crear un usuario alumno
 const agregarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let errors = (0, express_validator_1.validationResult)(req);
@@ -38,16 +69,6 @@ const agregarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     });
 });
 exports.agregarAlumno = agregarAlumno;
-// Obtener todos los usuarios alumnos
-const obtenerAllAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const get1 = yield prisma.alumnos.findMany();
-    res.status(200).json({
-        menssage: "Todos los registros de Alumnos",
-        success: true,
-        data: get1
-    });
-});
-exports.obtenerAllAlumno = obtenerAllAlumno;
 // Actualizar un usuario alumno
 const actualizarAlumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idAlumnos = Number(req.params.idAlumnos);
@@ -91,23 +112,3 @@ const eliminaTodoWarning = (req, res) => __awaiter(void 0, void 0, void 0, funct
     console.log('Se Elimino todos los Datos de Alumnos');
 });
 exports.eliminaTodoWarning = eliminaTodoWarning;
-const obtener1Alumno = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idAlumnos = Number(req.params.idAlumnos);
-    const alumno = yield prisma.alumnos.findUnique({
-        where: {
-            idAlumnos
-        }
-    });
-    if (!alumno) {
-        res.status(404).json({
-            success: false,
-            message: "Alumno no encontrado",
-        });
-        return;
-    }
-    res.status(200).json({
-        success: true,
-        data: alumno,
-    });
-});
-exports.obtener1Alumno = obtener1Alumno;

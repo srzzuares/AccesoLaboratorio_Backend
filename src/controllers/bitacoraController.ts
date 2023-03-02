@@ -3,26 +3,6 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 
-//Agregar un dato a Bitacora
-const agregarBitadora = async (req: Request, res: Response) => {
-    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
-    const post = await prisma.bitacora.create({
-        data: {
-            IdPersonal,
-            IdLaboratorio,
-            IdAlumno,
-            IdRecursoLaboratorio,
-            Fecha_Entrada,
-            Fecha_Salida,
-            Bitacoracol
-        }
-    })
-    res.status(200).json({
-        menssage: "Creacion completa",
-        success: true,
-        data: post
-    })
-}
 
 
 // Obetener todos los datos de Bitacora
@@ -59,6 +39,26 @@ const obtenerBitacoraOne = async (req: Request, res: Response) => {
     });
 }
 
+//Agregar un dato a Bitacora
+const agregarBitadora = async (req: Request, res: Response) => {
+    const { IdPersonal, IdLaboratorio, IdAlumno, IdRecursoLaboratorio, Fecha_Entrada, Fecha_Salida, Bitacoracol } = req.body;
+    const post = await prisma.bitacora.create({
+        data: {
+            IdPersonal,
+            IdLaboratorio,
+            IdAlumno,
+            IdRecursoLaboratorio,
+            Fecha_Entrada,
+            Fecha_Salida,
+            Bitacoracol
+        }
+    })
+    res.status(200).json({
+        menssage: "Creacion completa",
+        success: true,
+        data: post
+    })
+}
 
 // Actualizar un elemento de Bitacora
 const actualizarBitacora = async (req: Request, res: Response) => {

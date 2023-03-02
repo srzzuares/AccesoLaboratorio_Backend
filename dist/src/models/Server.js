@@ -12,6 +12,9 @@ const clases_1 = __importDefault(require("../routers/clases"));
 const datos_Persona_1 = __importDefault(require("../routers/datos_Persona"));
 const grupos_1 = __importDefault(require("../routers/grupos"));
 const laboratorio_1 = __importDefault(require("../routers/laboratorio"));
+const periodo_1 = __importDefault(require("../routers/periodo"));
+const personal_1 = __importDefault(require("../routers/personal"));
+const recursos_Laboratorio_1 = __importDefault(require("../routers/recursos_Laboratorio"));
 class Server {
     constructor() {
         this.App = (0, express_1.default)();
@@ -36,11 +39,14 @@ class Server {
         this.App.use('/', home_1.default);
         this.App.use('/alumno', alumno_1.default);
         this.App.use('/bitacora', bitacora_1.default);
-        this.App.use('/carreras', carrera_1.default);
-        this.App.use('/clases', clases_1.default);
+        this.App.use('/carrera', carrera_1.default);
+        this.App.use('/clase', clases_1.default);
         this.App.use('/datosPersonales', datos_Persona_1.default);
-        this.App.use('/grupos', grupos_1.default);
-        this.App.use('/laboratorios', laboratorio_1.default);
+        this.App.use('/grupo', grupos_1.default);
+        this.App.use('/laboratorio', laboratorio_1.default);
+        this.App.use('/periodo', periodo_1.default);
+        this.App.use('/personal', personal_1.default);
+        this.App.use('/recursosLab', recursos_Laboratorio_1.default);
     }
 }
 exports.default = Server;

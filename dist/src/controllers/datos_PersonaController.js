@@ -12,28 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarTodoDaper = exports.eliminarDaper = exports.actualizarDaper = exports.obtenerOneDaper = exports.obtenerDaper = exports.crearDaper = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const crearDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idDatos_persona, Titulo_Profesional, Apellido_P, Apellido_M, Nombre, Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
-    const post = yield prisma.datos_persona.create({
-        data: {
-            idDatos_persona,
-            Titulo_Profesional,
-            Apellido_P,
-            Apellido_M,
-            Nombre,
-            Genero,
-            Fecha_Nacimiento,
-            Estatus,
-            Foto
-        }
-    });
-    res.status(200).json({
-        menssage: "Se ha creado",
-        success: true,
-        data: post
-    });
-});
-exports.crearDaper = crearDaper;
 // Obtener Todo Personal
 const obtenerDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const getTodoDaPer = yield prisma.datos_persona.findMany();
@@ -44,6 +22,7 @@ const obtenerDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     });
 });
 exports.obtenerDaper = obtenerDaper;
+// obtener un personal
 const obtenerOneDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idDatos_persona = Number(req.params.idDatos_persona);
     const getOneDaper = yield prisma.datos_persona.findUnique({
@@ -65,6 +44,27 @@ const obtenerOneDaper = (req, res) => __awaiter(void 0, void 0, void 0, function
     });
 });
 exports.obtenerOneDaper = obtenerOneDaper;
+const crearDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { Titulo_Profesional, Apellido_P, Apellido_M, Nombre, Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;
+    const post = yield prisma.datos_persona.create({
+        data: {
+            Titulo_Profesional,
+            Apellido_P,
+            Apellido_M,
+            Nombre,
+            Genero,
+            Fecha_Nacimiento,
+            Estatus,
+            Foto
+        }
+    });
+    res.status(200).json({
+        menssage: "Se ha creado",
+        success: true,
+        data: post
+    });
+});
+exports.crearDaper = crearDaper;
 const actualizarDaper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idDatos_persona = Number(req.params.idDatos_persona);
     const { Titulo_Profesional, Apellido_P, Apellido_M, Nombre, Genero, Fecha_Nacimiento, Estatus, Foto } = req.body;

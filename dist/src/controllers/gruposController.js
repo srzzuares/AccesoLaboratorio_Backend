@@ -12,6 +12,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarTodoGrupos = exports.eliminarGrupos = exports.actualizarGrupos = exports.obtenerOneGrupos = exports.obtenerGrupos = exports.crearGrupos = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+// Grupos Obtener todo los grupos registrados
+const obtenerGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const getGru = yield prisma.grupos.findMany();
+    res.status(200).json({
+        menssage: "Resultados Encontrados ",
+        success: true,
+        data: getGru
+    });
+});
+exports.obtenerGrupos = obtenerGrupos;
+// Grupos Obtener un grupo por id
+const obtenerOneGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idGrupos = Number(req.params.idGrupos);
+    const getOneGru = yield prisma.grupos.findUnique({
+        where: {
+            idGrupos
+        }
+    });
+    res.status(200).json({
+        menssage: "Encontrado ",
+        success: true,
+        data: getOneGru
+    });
+});
+exports.obtenerOneGrupos = obtenerOneGrupos;
 // Grupos Crea un grupo
 const crearGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { Estatus, Grado, Grupo, IdCarrera, IdPeriodo } = req.body;
@@ -31,32 +56,7 @@ const crearGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     });
 });
 exports.crearGrupos = crearGrupos;
-// Grupos Obtener todo los grupos registrados
-const obtenerGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const getGru = yield prisma.grupos.findMany();
-    res.status(200).json({
-        menssage: "Resultados Encontrados ",
-        success: true,
-        data: getGru
-    });
-});
-exports.obtenerGrupos = obtenerGrupos;
-// Grupos 
-const obtenerOneGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idGrupos = Number(req.params.idGrupos);
-    const getOneGru = yield prisma.grupos.findUnique({
-        where: {
-            idGrupos
-        }
-    });
-    res.status(200).json({
-        menssage: "Encontrado ",
-        success: true,
-        data: getOneGru
-    });
-});
-exports.obtenerOneGrupos = obtenerOneGrupos;
-// Grupos 
+// Grupos  Actualizar un grupo
 const actualizarGrupos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idGrupos = Number(req.params.idGrupos);
     const { Estatus, Grado, Grupo, IdCarrera, IdPeriodo } = req.body;

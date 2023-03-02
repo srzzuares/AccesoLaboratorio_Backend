@@ -12,7 +12,38 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtener1Laboratorio = exports.eliminaTodoWarning = exports.eliminarLaboratorio = exports.actualizarLaboratorio = exports.obtenerAllLaboratorio = exports.agregarLaboratorio = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-// Crear un usuario alumno
+// Obtener todos los laboratorios
+const obtenerAllLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const get1 = yield prisma.laboratorio.findMany();
+    res.status(200).json({
+        menssage: "Todos los registros de los laboratorios",
+        success: true,
+        data: get1
+    });
+});
+exports.obtenerAllLaboratorio = obtenerAllLaboratorio;
+//obtener un laboratorio
+const obtener1Laboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idLaboratorio = Number(req.params.idLaboratorio);
+    const laboratorio = yield prisma.laboratorio.findUnique({
+        where: {
+            idLaboratorio
+        },
+    });
+    if (!laboratorio) {
+        res.status(404).json({
+            success: false,
+            message: "Lab no encontrado",
+        });
+        return;
+    }
+    res.status(200).json({
+        success: true,
+        data: laboratorio,
+    });
+});
+exports.obtener1Laboratorio = obtener1Laboratorio;
+//crear un laboratorio
 const agregarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { Nombre, Descripcion, Ubicacion, Cantidad, IdPersonal } = req.body;
     const post1 = yield prisma.laboratorio.create({
@@ -31,17 +62,7 @@ const agregarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, funct
     });
 });
 exports.agregarLaboratorio = agregarLaboratorio;
-// Obtener todos los usuarios alumnos
-const obtenerAllLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const get1 = yield prisma.laboratorio.findMany();
-    res.status(200).json({
-        menssage: "Todos los registros de los laboratorios",
-        success: true,
-        data: get1
-    });
-});
-exports.obtenerAllLaboratorio = obtenerAllLaboratorio;
-// Actualizar un usuario alumno
+// Actualizar un laboratorio
 const actualizarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idLaboratorio = Number(req.params.idLaboratorio);
     const { Nombre, Descripcion, Ubicacion, Cantidad, IdPersonal } = req.body;
@@ -64,7 +85,7 @@ const actualizarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, fu
     });
 });
 exports.actualizarLaboratorio = actualizarLaboratorio;
-// Eliminar un usuario alumno
+// Eliminar un laboratorio
 const eliminarLaboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idLaboratorio = Number(req.params.idLaboratorio);
     const delete1 = yield prisma.laboratorio.delete({
@@ -85,23 +106,3 @@ const eliminaTodoWarning = (req, res) => __awaiter(void 0, void 0, void 0, funct
     console.log('Se Elimino todos los Datos de Alumnos');
 });
 exports.eliminaTodoWarning = eliminaTodoWarning;
-const obtener1Laboratorio = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idLaboratorio = Number(req.params.idLaboratorio);
-    const laboratorio = yield prisma.laboratorio.findUnique({
-        where: {
-            idLaboratorio
-        },
-    });
-    if (!laboratorio) {
-        res.status(404).json({
-            success: false,
-            message: "Lab no encontrado",
-        });
-        return;
-    }
-    res.status(200).json({
-        success: true,
-        data: laboratorio,
-    });
-});
-exports.obtener1Laboratorio = obtener1Laboratorio;

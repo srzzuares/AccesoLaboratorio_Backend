@@ -2,6 +2,33 @@ import { Request, Response } from "express";
 import { PrismaClient, grupos } from "@prisma/client";
 const prisma = new PrismaClient()
 
+
+// Grupos Obtener todo los grupos registrados
+const obtenerGrupos = async (req: Request, res: Response) => {
+    const getGru = await prisma.grupos.findMany()
+    res.status(200).json({
+        menssage: "Resultados Encontrados ",
+        success: true,
+        data: getGru
+    })
+}
+
+
+// Grupos Obtener un grupo por id
+const obtenerOneGrupos = async (req: Request, res: Response) => {
+    const idGrupos = Number(req.params.idGrupos)
+    const getOneGru = await prisma.grupos.findUnique({
+        where: {
+            idGrupos
+        }
+    })
+    res.status(200).json({
+        menssage: "Encontrado ",
+        success: true,
+        data: getOneGru
+    })
+}
+
 // Grupos Crea un grupo
 const crearGrupos = async (req: Request, res: Response) => {
     const { Estatus, Grado, Grupo, IdCarrera, IdPeriodo } = req.body
@@ -22,34 +49,9 @@ const crearGrupos = async (req: Request, res: Response) => {
 }
 
 
-// Grupos Obtener todo los grupos registrados
-const obtenerGrupos = async (req: Request, res: Response) => {
-    const getGru = await prisma.grupos.findMany()
-    res.status(200).json({
-        menssage: "Resultados Encontrados ",
-        success: true,
-        data: getGru
-    })
-}
 
 
-// Grupos 
-const obtenerOneGrupos = async (req: Request, res: Response) => {
-    const idGrupos = Number(req.params.idGrupos)
-    const getOneGru = await prisma.grupos.findUnique({
-        where: {
-            idGrupos
-        }
-    })
-    res.status(200).json({
-        menssage: "Encontrado ",
-        success: true,
-        data: getOneGru
-    })
-}
-
-
-// Grupos 
+// Grupos  Actualizar un grupo
 const actualizarGrupos = async (req: Request, res: Response) => {
     const idGrupos = Number(req.params.idGrupos)
     const { Estatus, Grado, Grupo, IdCarrera, IdPeriodo } = req.body
