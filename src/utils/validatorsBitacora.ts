@@ -30,7 +30,7 @@ const validarRegistroBitacora = () => {
             .isDate().withMessage('Debe ser formato fecha y es para entrada. '),
         body('Fecha_Salida')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
-            .isDate().withMessage('Debe ser formato fecha y es para entrada. '),
+            .isDate().withMessage('Debe ser formato fecha y es para Salida. '),
         body('Bitacoracol')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
 
