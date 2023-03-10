@@ -32,9 +32,8 @@ const validarRegistroBitacora = () => {
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
             .isDate().withMessage('Debe ser formato fecha y es para Salida. '),
         body('Bitacoracol')
-            .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
-
-
+            .trim().not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
+            .isLength({max:45}).withMessage('Cadena de texto maximo 45 caracteres')
     ]
 }
 
@@ -60,6 +59,7 @@ const validarActualizacionBitacora = () => {
             .isDate().withMessage('Debe ser formato fecha y es para entrada. '),
         body('Bitacoracol')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
+            .isLength({max:45}).withMessage('Cadena de texto maximo 45 caracteres')
     ]
 }
 

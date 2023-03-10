@@ -17,23 +17,22 @@ import { PrismaClient, clases } from '@prisma/client'
 
 const validarRegistroClases = () => {
     return [
-        body('Dia').trim()
+        body('Dia')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
-            .isDate().withMessage('Debe ser formato fecha '),
+            .toLowerCase().isIn(['lunes', 'martes', 'miercoles', 'viernes', 'sabado']).withMessage('Debe eligir el nombre de un dia lunes a domingo'),
         body('Hora_Inicio')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
             .isDate().withMessage('Debe ser formato fecha y es para entrada. '),
         body('Hora_Final')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
             .isDate().withMessage('Debe ser formato fecha y es para Salida. '),
-
         body('Actividad')
             .trim().not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
-            .isString().withMessage('Es Cadena de Texto.'),
+            .isLength({max:45}).withMessage('Es Cadena de Texto. Con un maximo de 45 caracteres'),
         body('Materia').trim()
             .trim().not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
-            .isString().withMessage('Es Cadena de Texto.'),
-
+            .isString().withMessage('Es Cadena de Texto.')
+            .isLength({max:45}).withMessage('Es Cadena de Texto. Con un maximo de 45 caracteres'),
         body('IdPeriodo')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
             .isInt().withMessage('Debe ser de tipo numerico. '),
@@ -52,23 +51,22 @@ const validarRegistroClases = () => {
 
 const validarActualizacionClases = () => {
     return [
-        body('Dia').trim()
+        body('Dia')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
-            .isDate().withMessage('Debe ser formato fecha '),
+            .toLowerCase().isIn(['lunes', 'martes', 'miercoles', 'viernes', 'sabado']).withMessage('Debe eligir el nombre de un dia lunes a domingo'),
         body('Hora_Inicio')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
             .isDate().withMessage('Debe ser formato fecha y es para entrada. '),
         body('Hora_Final')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo')
             .isDate().withMessage('Debe ser formato fecha y es para Salida. '),
-
         body('Actividad')
             .trim().not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
-            .isString().withMessage('Es Cadena de Texto.'),
+            .isLength({max:45}).withMessage('Es Cadena de Texto. Con un maximo de 45 caracteres'),
         body('Materia').trim()
             .trim().not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
-            .isString().withMessage('Es Cadena de Texto.'),
-
+            .isString().withMessage('Es Cadena de Texto.')
+            .isLength({max:45}).withMessage('Es Cadena de Texto. Con un maximo de 45 caracteres'),
         body('IdPeriodo')
             .not().isEmpty().withMessage('Hola?, Esta Vacio este campo.')
             .isInt().withMessage('Debe ser de tipo numerico. '),
